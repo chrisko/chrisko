@@ -1,0 +1,52 @@
+# .zshenv is for all shells. Nothing here should produce any output.
+
+export FINELIBERTY=pathwith.burbank.corp.yahoo.com
+export DEV42=dev42ac2.ysm.ac2.yahoo.com
+export DAISY=appsc160.back.sc.p4pnet.net
+export WEB48=web48ac2.ysm.ac2.yahoo.com
+
+# Augment perl @INC with DM libraries. (Adds a colon if $PERLLIB is already set.)
+[ -z "$PERLLIB" ] || export PERLLIB=$PERLLIB:
+export PERLLIB=$PERLLIB:~/src/perl
+export PERLLIB=$PERLLIB:/home/y/lib/perl5/site_perl/5.8/i686-linux-64int
+export PERLLIB=$PERLLIB:/usr/lib/perl5/vendor_perl/5.8.5
+
+[[ -e ~/src/bin ]] && export PATH=$PATH:~/src/bin
+[[ -e ~/src/ckoenig/bin ]] && export PATH=$PATH:~/src/ckoenig/bin
+[[ -e ~/src/git ]] && export PATH=$PATH:~/src/git
+
+export CVSROOT=vault.yahoo.com:/CVSROOT
+export CVS_RSH=/usr/bin/ssh
+
+AC2=`hostname | perl -ne 'print (/dev(\d+)ac2\./ ? $1 : 0);'`
+if [ $AC2 -gt 0 ]; then
+  export SVNROOT=svn+ssh://svncorp/yahoo/ysm/affdm  # RemoteForwarded
+  export DIST=distcorp                              # RemoteForwarded
+  export IGOR_URL=http://igorcorp/igor/api          # RemoteForwarded
+  source ~/.zshenv_ac2
+else
+  export SVNROOT=svn+ssh://svn.corp.yahoo.com/yahoo/ysm/affdm
+  export DIST=dist.corp.yahoo.com
+fi
+
+export GIT_EXEC_PATH=~/src/git
+export GITPERLLIB=~/src/git/perl/blib/lib
+
+export EDITOR=vim
+export SVN_EDITOR=vim
+
+export ROOT=${ROOT:-/home/y}
+[ -e $ROOT ] && export PATH=$ROOT/bin:$ROOT/sbin:$PATH
+
+if [ -e /sw/Applications/AquaTerm.app ]; then
+  export GNUTERM="aqua"
+  export AQUATERM_PATH="/sw/Applications/AquaTerm.app"
+fi
+
+[ -e /sw/bin ] && export PATH=$PATH:/sw/bin
+[ -e ~/src/bin ] && export PATH=$PATH:~/src/bin
+
+[[ -e /sw/bin/init.sh ]] && . /sw/bin/init.sh
+
+# For Haskell SOE, mostly:
+export DISPLAY=:0.0

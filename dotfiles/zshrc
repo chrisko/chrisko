@@ -1,0 +1,34 @@
+# .zshrc contains settings for interactive shells only.
+
+# Command prompt
+export PROMPT=$'%U%n@%m:%u%{\e[0;31m%}'${YROOT_NAME}$'%{\e[0m%}[%B%h%b]:%B%~%b%% '
+
+# vi editing
+bindkey -v
+
+# No beeping
+set nobeep
+
+# Set up aliases
+alias ifind='find . -iname'
+alias fineliberty='ssh -q fineliberty'
+alias dev42='ssh dev42'
+alias web48='ssh web48'
+
+# Start keychain to store passphrases:
+if [ -e /usr/bin/keychain ]; then
+    if [ -e ~/.keychain ]; then
+        if [ `ls ~/.keychain/*-sh | wc -l` -gt 0 ]; then source ~/.keychain/*-sh; fi
+        /usr/bin/keychain --nogui ~/.ssh/id_rsa ~/.ssh/id_dsa ~/.ssh/identity \
+                                                     > /dev/null 2> /dev/null
+    fi
+fi
+
+# zsh completion
+autoload -U compinit; compinit;
+# For ssh hosts:
+hosts=(${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*})
+zstyle ':completion:*' hosts make $hosts
+
+# Aliases
+alias cd..="cd .."

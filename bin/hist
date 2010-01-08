@@ -1,0 +1,13 @@
+#!/usr/local/bin/perl
+use strict; use warnings;
+
+my %hist = ();
+while (<>){
+  chomp;
+  $hist{$_} ||= 0;
+  $hist{$_}++;
+}
+
+foreach (sort {$hist{$b} <=> $hist{$a}} keys %hist){
+  print "$_    $hist{$_}\n";
+}

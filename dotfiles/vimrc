@@ -1,0 +1,102 @@
+" Chris Koenig, February 2006
+" ~/.vimrc
+
+" Note: nmap is normal mode, imap is insert mode, vmap is visual mode
+
+" Use vim defaults instead of vi settings
+set nocompatible
+
+" Keep the indenting of the last line
+set autoindent
+
+" Increase indent when last line ends with {
+set smartindent
+
+" Show the cursor position at all times
+set ruler
+
+" Make sure status line is always visible
+set laststatus=2
+
+" Custom status line
+if has("statusline")
+    set statusline=%<%f\ %h%m%r%=%k[%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %-12.(%l,%c%V%)\ %P 
+endif
+
+" Set syntax highlighting
+if has("syntax")
+    syntax on
+endif
+
+" Insert spaces when tab key is pressed
+set expandtab
+
+" Insert this many spaces for a tab
+set tabstop=4
+
+" Insert this many spaces for an indentation
+set shiftwidth=4
+
+" Briefly highlight the matching '(' whenever ')' is typed
+set showmatch
+" How many tenths of a second to blink
+set mat=2
+" And disable the constant highlighting
+let loaded_matchparen = 1
+
+" Bash-style filename completion
+set wildmode=longest,list
+" Ignoring these file suffixes:
+set wildignore=*~,#*#,*.o,*.class
+"
+
+" Turn off the bell
+set vb t_vb=
+
+" Set F8 to toggle syntax
+map <silent> <F8> :if exists("syntax_on")<Bar>syntax off<Bar>else<Bar>syntax on<Bar>endif<CR>
+
+" Set F7 to retab file, remove whitespace from end of lines
+map <silent> <F7> :%s/\s\+$//g<CR>:retab<CR>
+
+" In insert mode, allow backspace over anything (line breaks, text beyond this insert session, indentations)
+set backspace=eol,start,indent
+
+" Recognize DOS-format ^M files
+set textauto
+
+" BOMB and Unicode encodings
+if has("multi_byte")
+  if &termencoding == ""
+    let &termencoding = &encoding
+  endif
+  set encoding=utf-8
+  setglobal fileencoding=utf-8
+  set fileencodings=utf-8,latin1
+endif
+
+" Detect when file is changed from outside
+set autoread
+
+" Set cursor movement keys to wrap between lines
+set whichwrap+=<,>,h,l,~,[,]
+
+" Store backups, in specified directory, with specified extension
+set backupdir=/tmp
+set bex=.bak
+set backup
+
+"""" MAPPINGS """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable in-column up and down for wrapped lines
+map <silent> <Up>   gk
+map <silent> <Down> gj
+" Enable in-column up and down for wrapped lines in INSERT mode
+imap <silent> <Up>   <C-o>gk
+imap <silent> <Down> <C-o>gj
+
+" Map backspace to delete previous character
+nmap <BS> <Esc><C-V><BS><Esc>
+
+map ,, <Esc><C-w><C-w>
+
+filetype plugin indent on

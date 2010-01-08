@@ -1,0 +1,67 @@
+################################################################################
+## Third-Party #################################################################
+################################################################################
+git:     git://git.kernel.org/pub/scm/git/git.git
+gnuplot: git://github.com/lueckenhoff/gnuplot-current.git
+hudson:  git://github.com/kohsuke/hudson.git
+tig:     git://repo.or.cz/tig.git
+
+################################################################################
+## Non-Yellowstone #############################################################
+################################################################################
+affil:
+  url = svn+ssh://svn.corp.yahoo.com/yahoo/ysm/affdm
+  fetch = over/trunk:refs/remotes/affdm/trunk
+  branches = over/branches/dev/*:refs/remotes/affdm/*
+
+canon:
+  url = svn+ssh://svn.corp.yahoo.com/yahoo/ysm/canon
+  fetch = trunk:refs/remotes/trunk
+  branches = branches/*:refs/remotes/*
+  tags = tags/*:refs/remotes/tags/*
+
+ssfe:
+  url = svn+ssh://svn.corp.yahoo.com/yahoo/ysm/ssfe
+  fetch = trunk:refs/remotes/trunk
+  branches = branches/dev/*:refs/remotes/*
+
+ssol:
+  url = svn+ssh://svn.corp.yahoo.com/yahoo/ysm/affdm
+  fetch = ssol/trunk:refs/remotes/trunk
+  branches = ssol/branches//*:refs/remotes/*
+
+################################################################################
+## Yellowstone #################################################################
+################################################################################
+columbo:
+  url = svn+ssh://svn.corp.yahoo.com/yahoo/ysm/YSRise/tools/trunk/columbo
+  fetch = :refs/remotes/git-svn
+
+rise:
+  url = svn+ssh://svn.corp.yahoo.com/yahoo/keystonecore/core
+  fetch = RISe/trunk:refs/remotes/rise/trunk
+  branches = RISe/branches/KS-2.6-dev/*:refs/remotes/rise/*
+
+stonecutter:
+  url = svn+ssh://svn.corp.yahoo.com/yahoo/keystonecore
+  fetch = shared/StoneCutter/ys/trunk:refs/remotes/trunk
+  branches = shared/StoneCutter/ys/branches/YS-0.4-rel/*:refs/remotes/YS-0.4-rel/*
+  branches = shared/StoneCutter/ys/branches/YS-0.5-rel/*:refs/remotes/YS-0.5-rel/*
+  branches = shared/StoneCutter/ys/branches/YS-0.6-dev/*:refs/remotes/YS-0.6-dev/*
+                           ...etc...
+
+  branches = shared/StoneCutter/ys/*/stonecutter_geo:refs/remotes/stonecutter_geo/*
+  branches = shared/StoneCutter/ys/*/YS_LM:refs/remotes/YS_LM/*
+  branches = shared/StoneCutter/ys/*/crf_integration:refs/remotes/crf_integration/*
+                           ...etc...
+
+
+ysfe:
+  url = svn+ssh://svn.corp.yahoo.com/yahoo/ysm/YSRise
+  fetch = frontend/trunk:refs/remotes/trunk
+
+  branches = frontend/*/ysfe_with_gds:refs/remotes/ysfe_with_gds/*
+  branches = frontend/*/ysfe_with_geo:refs/remotes/ysfe_with_geo/*
+  branches = frontend/branches/YS-0.1-rel/*:refs/remotes/YS-0.1-rel/*
+  branches = frontend/branches/YS-0.3-dev/*:refs/remotes/YS-0.3-dev/*
+                           ...etc...
