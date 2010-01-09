@@ -55,7 +55,6 @@ stonecutter:
   branches = shared/StoneCutter/ys/*/crf_integration:refs/remotes/crf_integration/*
                            ...etc...
 
-
 ysfe:
   url = svn+ssh://svn.corp.yahoo.com/yahoo/ysm/YSRise
   fetch = frontend/trunk:refs/remotes/trunk
