@@ -37,7 +37,7 @@ yinst ls yahoo_cfg_dev
 if [[ $? -ne 0 ]]; then
     echo "Cannot find yahoo_cfg_dev. Installing from stable branch..."
     # This particular version is required by the build package:
-    yinst install yahoo_cfg_dev-2.8.14
+    sudo yinst install yahoo_cfg_dev-2.8.14
     [[ $? -ne 0 ]] && { echo "Install of yahoo_cfg_dev failed."; exit 1; }
 fi
 
@@ -53,7 +53,7 @@ if [[ `ls pkg/yellowstone_frontend_build-*.tgz | wc -l` -eq 0 ]]; then
 fi
 
 echo "Installing newly-built YSFE build package..."
-yinst install -br test pkg/yellowstone_frontend_build-*.tgz
+sudo yinst install -br test pkg/yellowstone_frontend_build-*.tgz
 [[ $? -ne 0 ]] && { echo "Install of build package failed."; exit 1; }
 
 ################################################################################
@@ -105,7 +105,7 @@ rm -rf pkg/yellowstone_frontend-*.tgz &> /dev/null
 (cd pkg && yinst_create -t $BUILD_TYPE yellowstone_frontend.yicf)
 [[ $? -ne 0 ]] && { echo "Failed to create YSFE server package."; exit 1; }
 echo "Server package created, installing..."
-yinst install -br test pkg/yellowstone_frontend-*.tgz
+sudo yinst install -br test pkg/yellowstone_frontend-*.tgz
 [[ $? -ne 0 ]] && { echo "Failed to install YSFE server package."; exit 1; }
 
 # Now we can build all the conf and meta package yicfs using the pkg/ perl
@@ -115,6 +115,9 @@ echo "Creating package yicfs via generation scripts..."
 [[ $? -ne 0 ]] && { echo "Failed to generate pkg/ yicfs."; exit 1; }
 (cd pkg && make package-$BUILD_TYPE)
 [[ $? -ne 0 ]] && { echo "Problem building packages."; exit 1; }
+# Remove the build/server packages we just created, in favor of the older ones:
+(cd pkg && rm `ls yellowstone_frontend-*.tgz | sort -n | tail -1`)
+(cd pkg && rm `ls yellowstone_frontend_build-*.tgz | sort -n | tail -1`)
 
 # Don't forget to build the tools/ packages, as well.
 echo "Building YSFE tools package..."

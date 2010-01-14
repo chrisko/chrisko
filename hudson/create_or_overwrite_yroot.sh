@@ -33,12 +33,12 @@ fi
 # If a yroot by this name already exists, remove it, so we can start fresh.
 if [[ `yroot --list | grep -P "^\s*$NEW_YROOT_NAME\s+" | wc -l` -eq 1 ]]; then
     echo "Found existing yroot at $NEW_YROOT_NAME. Removing."
-    yroot --remove $NEW_YROOT_NAME
+    sudo yroot --remove $NEW_YROOT_NAME
     [[ $? -ne 0 ]] && { echo "yroot --remove failed. Exiting $CMD_NAME."; exit 1; }
 fi
 
 # Finally, create the yroot, passing in any remaining command-line arguments:
-YROOT_COMMAND="yroot --create $NEW_YROOT_NAME $@"
+YROOT_COMMAND="sudo yroot --create --nosudoers $NEW_YROOT_NAME $@"
 echo "Executing \"$YROOT_COMMAND\"..."
 $YROOT_COMMAND
 [[ $? -ne 0 ]] && { echo "yroot --create failed. Exiting $CMD_NAME."; exit 1; }

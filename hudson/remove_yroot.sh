@@ -40,7 +40,7 @@ if [[ `yroot --list | grep -P "^\s*$CONDEMNED_YROOT\s+" | wc -l` -eq 0 ]]; then
     exit 0;
 fi
 
-REMOVAL_COMMAND="yroot --remove $CONDEMNED_YROOT"
+REMOVAL_COMMAND="sudo yroot --remove $CONDEMNED_YROOT"
 echo "Executing \"$REMOVAL_COMMAND\"..."
 $REMOVAL_COMMAND
 [[ $? -ne 0 ]] && { echo "yroot --remove failed. Exiting $CMD_NAME."; exit 1; }
