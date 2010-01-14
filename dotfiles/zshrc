@@ -16,19 +16,20 @@ alias dev42='ssh dev42'
 alias web48='ssh web48'
 
 # Start keychain to store passphrases:
-if [ -e /usr/bin/keychain ]; then
-    if [ -e ~/.keychain ]; then
-        if [ `ls ~/.keychain/*-sh | wc -l` -gt 0 ]; then source ~/.keychain/*-sh; fi
-        /usr/bin/keychain --nogui ~/.ssh/id_rsa ~/.ssh/id_dsa ~/.ssh/identity \
-                                                     > /dev/null 2> /dev/null
+if [[ -e /usr/bin/keychain ]]; then
+    if [[ -e ~/.keychain ]]; then
+        [[ `ls ~/.keychain/*-sh | wc -l` -gt 0 ] && source ~/.keychain/*-sh
+        /usr/bin/keychain --nogui ~/.ssh/id_rsa ~/.ssh/id_dsa ~/.ssh/identity > /dev/null 2> /dev/null
     fi
 fi
 
 # zsh completion
 autoload -U compinit; compinit;
 # For ssh hosts:
-hosts=(${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*})
-zstyle ':completion:*' hosts make $hosts
+if [[ -e $HOME/.ssh/known_hosts ]]; then
+    hosts=(${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*})
+    zstyle ':completion:*' hosts make $hosts
+fi
 
 # Aliases
 alias cd..="cd .."
