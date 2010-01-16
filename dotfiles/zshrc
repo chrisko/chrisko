@@ -18,7 +18,7 @@ alias web48='ssh web48'
 # Start keychain to store passphrases:
 if [[ -e /usr/bin/keychain ]]; then
     if [[ -e ~/.keychain ]]; then
-        [[ `ls ~/.keychain/*-sh | wc -l` -gt 0 ] && source ~/.keychain/*-sh
+        [[ `ls ~/.keychain/*-sh | wc -l` -gt 0 ]] && source ~/.keychain/*-sh
         /usr/bin/keychain --nogui ~/.ssh/id_rsa ~/.ssh/id_dsa ~/.ssh/identity > /dev/null 2> /dev/null
     fi
 fi

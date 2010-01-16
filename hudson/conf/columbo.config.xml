@@ -18,14 +18,14 @@
         <string>uploadpack</string>
         <string>git-upload-pack</string>
         <string>url</string>
-        <string>/home/ckoenig/src/stonecutter</string>
+        <string>/home/ckoenig/src/columbo</string>
         <string>tagopt</string>
         <string></string>
       </org.spearce.jgit.transport.RemoteConfig>
     </remoteRepositories>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/YS-1.9-dev</name>
+        <name>*</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <mergeOptions/>
@@ -37,32 +37,21 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
     <hudson.triggers.SCMTrigger>
-      <spec>*/30     *     *     *     *</spec>
+      <spec>*/2     *     *     *     *</spec>
     </hudson.triggers.SCMTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
       <command>git clean -df
-~/src/ckoenig/hudson/create_or_overwrite_yroot.sh stonecutter_build --i386 4.8-20090518
-yroot stonecutter_build --cmd &quot;yinst install yahoo_cfg_dev &amp;&amp; cd $WORKSPACE &amp;&amp; ./makeall.sh&quot;
-yroot stonecutter_build --cmd &quot;yinst install ports/doxygen-1:1.6.1-1 &amp;&amp; cd $WORKSPACE &amp;&amp; doxygen ./doxygen.cfg&quot;
-~/src/ckoenig/hudson/remove_yroot.sh stonecutter_build</command>
+(cd pkg &amp;&amp; make package)</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>feature_extractor/package/target/ys_stonecutter*.tgz, dataset/package/target/ys_stonecutter_data*.tgz</artifacts>
+      <artifacts>pkg/yellowstone_columbo_perl-*.tgz</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
-    <hudson.tasks.Fingerprinter>
-      <targets></targets>
-      <recordBuildArtifacts>true</recordBuildArtifacts>
-    </hudson.tasks.Fingerprinter>
-    <hudson.plugins.doxygen.DoxygenArchiver>
-      <doxyfilePath>doxygen.cfg</doxyfilePath>
-      <keepAll>false</keepAll>
-    </hudson.plugins.doxygen.DoxygenArchiver>
   </publishers>
   <buildWrappers/>
 </project>
