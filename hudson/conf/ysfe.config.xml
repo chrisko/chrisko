@@ -46,6 +46,9 @@
       <hudson.plugins.git.BranchSpec>
         <name>*/1.9-dev</name>
       </hudson.plugins.git.BranchSpec>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/1.9-rel</name>
+      </hudson.plugins.git.BranchSpec>
     </branches>
     <mergeOptions/>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>

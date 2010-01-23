@@ -18,7 +18,7 @@
         <hudson.plugins.batch__task.BatchTask>
           <name>regenerate_ysfe_yroot</name>
           <script>~/src/ckoenig/hudson/create_or_overwrite_yroot.sh ysfe --i386 4.8-20090518&#xd;
-yroot ysfe --cmd &quot;yinst install ~/.hudson/jobs/ysfe/lastStable/archive/pkg/yellowstone_frontend_build-*.tgz&quot;</script>
+yroot ysfe --cmd &quot;yinst install ~/.hudson/jobs/ysfe/lastStable/archive/pkg/yellowstone_frontend_build-*.tgz -br test&quot;</script>
         </hudson.plugins.batch__task.BatchTask>
       </tasks>
     </hudson.plugins.batch__task.BatchTaskProperty>
@@ -43,7 +43,7 @@ yroot ysfe --cmd &quot;yinst install ~/.hudson/jobs/ysfe/lastStable/archive/pkg/
     </remoteRepositories>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/1.9-dev</name>
+        <name>*/1.9-rel</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <mergeOptions/>

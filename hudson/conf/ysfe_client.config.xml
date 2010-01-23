@@ -45,8 +45,15 @@
     <hudson.tasks.Shell>
       <command>git clean -df
 ~/src/ckoenig/hudson/create_or_overwrite_yroot.sh ysfe_client_build --i386 4.8-20090518
-yroot ysfe_client_build --cmd &quot;yinst install -br test ysfe_client_build&quot;
-yroot ysfe_client_build --cmd &quot;cd $WORKSPACE &amp;&amp; ./bootstrap &amp;&amp; ./configure &amp;&amp; make package-$PACKAGE_BUILD_TYPE&quot;
+yroot ysfe_client_build --cmd &quot;yinst install -br test yellowstone_frontendclient_build&quot;
+
+if [[ &quot;$PACKAGE_BUILD_TYPE&quot; = &quot;release&quot; ]]; then
+    PACKAGE_BUILD_TYPE=&quot;-release&quot;
+else
+    PACKAGE_BUILD_TYPE=&quot;&quot;
+fi
+
+yroot ysfe_client_build --cmd &quot;cd $WORKSPACE &amp;&amp; ./bootstrap &amp;&amp; ./configure &amp;&amp; make package$PACKAGE_BUILD_TYPE&quot;
 #~/src/ckoenig/hudson/remove_yroot.sh ysfe_client_build</command>
     </hudson.tasks.Shell>
   </builders>
