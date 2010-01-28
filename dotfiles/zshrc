@@ -11,7 +11,7 @@ set nobeep
 
 # Set up aliases
 alias ifind='find . -iname'
-alias fineliberty='ssh -q fineliberty'
+alias fineliberty='ssh -q pathwith.greatamerica.corp.yahoo.com'
 alias dev42='ssh dev42'
 alias web48='ssh web48'
 
