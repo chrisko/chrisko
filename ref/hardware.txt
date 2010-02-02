@@ -1,0 +1,2 @@
+Disable screen from blanking on raw terminals:
+  setterm -powerdown off -blank 0
