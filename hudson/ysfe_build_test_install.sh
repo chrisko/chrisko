@@ -35,7 +35,7 @@ yinst version &> /dev/null
 # Now we'll make sure yahoo_cfg_dev (including yinst_create) is installed:
 yinst ls yahoo_cfg_dev
 if [[ $? -ne 0 ]]; then
-    echo "Cannot find yahoo_cfg_dev. Installing from stable branch..."
+    echo "Cannot find yahoo_cfg_dev. Installing version 2.8.14..."
     # This particular version is required by the build package:
     sudo yinst install yahoo_cfg_dev-2.8.14
     [[ $? -ne 0 ]] && { echo "Install of yahoo_cfg_dev failed."; exit 1; }

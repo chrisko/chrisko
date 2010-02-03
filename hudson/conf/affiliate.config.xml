@@ -18,14 +18,14 @@
         <string>uploadpack</string>
         <string>git-upload-pack</string>
         <string>url</string>
-        <string>/home/ckoenig/src/columbo</string>
+        <string>/home/ckoenig/src/affil</string>
         <string>tagopt</string>
         <string></string>
       </org.spearce.jgit.transport.RemoteConfig>
     </remoteRepositories>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*</name>
+        <name>*/2010.2.10</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <mergeOptions/>
@@ -37,29 +37,36 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
     <hudson.triggers.SCMTrigger>
-      <spec>*/1     *     *     *     *</spec>
+      <spec>*/5     *     *     *     *</spec>
     </hudson.triggers.SCMTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
       <command>git clean -df
-(cd pkg &amp;&amp; make package)</command>
+~/src/ckoenig/hudson/create_or_overwrite_yroot.sh affiliate_build --i386 4.1-20050509
+yroot affiliate_build --cmd &quot;cd $WORKSPACE &amp;&amp; ~/src/ckoenig/hudson/affiliate_build.sh $PACKAGE_BUILD_TYPE&quot;
+#~/src/ckoenig/hudson/remove_yroot.sh affiliate_build</command>
     </hudson.tasks.Shell>
   </builders>
-  <publishers>
-    <hudson.tasks.ArtifactArchiver>
-      <artifacts>pkg/yellowstone_columbo_perl-*.tgz</artifacts>
-      <latestOnly>false</latestOnly>
-    </hudson.tasks.ArtifactArchiver>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>columbo_test</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
-  </publishers>
-  <buildWrappers/>
+  <publishers/>
+  <buildWrappers>
+    <hudson.plugins.release.ReleaseWrapper>
+      <releaseVersionTemplate></releaseVersionTemplate>
+      <parameterDefinitions>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>PACKAGE_BUILD_TYPE</name>
+          <description>By default, test yinst packages will be generated. For release builds, though, which are meant to be uploaded to dist, we&apos;d like to instead build release packages.</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>test</string>
+              <string>release</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+      </parameterDefinitions>
+      <preBuildSteps/>
+      <postBuildSteps/>
+    </hudson.plugins.release.ReleaseWrapper>
+  </buildWrappers>
 </project>

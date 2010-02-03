@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.RunParameterDefinition>
+          <name>COLUMBO_BUILD</name>
+          <description>Which Columbo build to use for the deploy and test.</description>
+          <projectName>columbo</projectName>
+        </hudson.model.RunParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty/>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>~/src/ckoenig/hudson/create_or_overwrite_yroot.sh columbo_test --i386 4.8-20090518
+echo $COLUMBO_BUILD
+
+yroot columbo_test --cmd &quot;yinst install perlbase&quot;
+yroot columbo_test --cmd &quot;yinst install -br test ~/.hudson/jobs/columbo/lastStable/archive/pkg/yellowstone_columbo_perl-*.tgz&quot;
+yroot columbo_test --cmd &quot;~/src/ckoenig/hudson/columbo_syntax_check.sh&quot;
+
+scp ~/.hudson/jobs/columbo/lastStable/archive/pkg/yellowstone_columbo_perl-*.tgz af1181.yss.ac4.yahoo.com:/tmp/latest_columbo_package.tgz
+ssh af1181.yss.ac4.yahoo.com &quot;sudo yinst install perlbase; sudo yinst install -br test /tmp/latest_columbo_package.tgz&quot;
+
+~/src/ckoenig/hudson/remove_yroot.sh columbo_test</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
