@@ -1,0 +1,3 @@
+our $GIT = "/home/ckoenig/src/git/git";
+our $projectroot = "/home/ckoenig/src";
+our $site_name = "ckoenig git projects";

@@ -20,8 +20,10 @@ export CVS_RSH=/usr/bin/ssh
 
 export SVNROOT=svn+ssh://svn.corp.yahoo.com/yahoo/ysm/affdm
 
-export GIT_EXEC_PATH=~/src/git
-export GITPERLLIB=~/src/git/perl/blib/lib
+export GIT_BINDIR=~/src/git/
+export GIT_EXEC_PATH=~/src/git/
+export GITPERLLIB=~/src/git/perl/blib/lib/
+export GITWEB_CONFIG=~/.gitweb
 
 export EDITOR=vim
 export SVN_EDITOR=vim
