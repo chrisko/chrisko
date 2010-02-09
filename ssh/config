@@ -1,1 +1,5 @@
 Protocol 2
+
+Host fineliberty
+    HostName pathwith.greatamerica.corp.yahoo.com
+    RemoteForward 56230 localhost:22
