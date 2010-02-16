@@ -52,6 +52,7 @@
       <artifacts>pkg/yellowstone_columbo_perl-*.tgz</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.test.AggregatedTestResultPublisher/>
     <hudson.tasks.BuildTrigger>
       <childProjects>columbo_test</childProjects>
       <threshold>

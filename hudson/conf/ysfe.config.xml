@@ -44,10 +44,7 @@
     </remoteRepositories>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/1.9-dev</name>
-      </hudson.plugins.git.BranchSpec>
-      <hudson.plugins.git.BranchSpec>
-        <name>*/1.9-rel</name>
+        <name>*/2.2-rel</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <mergeOptions/>
@@ -85,6 +82,14 @@ yroot ysfe_build --cmd &quot;cd $WORKSPACE &amp;&amp; ~/src/ckoenig/hudson/ysfe_
       <targets></targets>
       <recordBuildArtifacts>true</recordBuildArtifacts>
     </hudson.tasks.Fingerprinter>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>ysfe_deploy</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
     <hudson.plugins.cppunit.CppUnitPublisher>
       <testResultsPattern>tests/test_results.xml</testResultsPattern>
       <useWorkspaceBaseDir>true</useWorkspaceBaseDir>

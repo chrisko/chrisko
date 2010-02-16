@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.RunParameterDefinition>
+          <name>WHICH_YSFE_BUILD</name>
+          <description>Which YSFE Hudson build number we want deployed. Chooses the last run by default.</description>
+          <projectName>ysfe</projectName>
+        </hudson.model.RunParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>DEPLOY_HOST</name>
+          <description>This is the host on which to deploy the YSFE instance.</description>
+          <defaultValue>af1183.yss.ac4.yahoo.com</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>DEPLOY_YROOT</name>
+          <description>The name of the deploy host&apos;s yroot, where we intend to install the YSFE instance.</description>
+          <defaultValue>ysfe_deploy</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty/>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>true</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command></command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

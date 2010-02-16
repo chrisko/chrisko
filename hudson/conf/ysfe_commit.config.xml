@@ -43,7 +43,7 @@ yroot ysfe --cmd &quot;yinst install ~/.hudson/jobs/ysfe/lastStable/archive/pkg/
     </remoteRepositories>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/1.9-rel</name>
+        <name>*/2.1-rel</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <mergeOptions/>
