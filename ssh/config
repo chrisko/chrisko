@@ -3,3 +3,16 @@ Protocol 2
 Host fineliberty
     HostName pathwith.greatamerica.corp.yahoo.com
     RemoteForward 56230 localhost:22
+
+Host corp
+    Hostname proxy.corp.yahoo.com
+    CompressionLevel 9
+    ForwardAgent yes
+
+Host mblue
+    # http://twiki.corp.yahoo.com/view/GridDocumentation/MithrilBlueClusterInfo
+    Hostname mithril-gw.blue.ygrid.yahoo.com
+
+Host mgold
+    # http://twiki.corp.yahoo.com/view/GridDocumentation/MithrilGoldClusterInfo
+    Hostname mithril-gw.gold.ygrid.yahoo.com

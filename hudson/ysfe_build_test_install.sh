@@ -46,14 +46,14 @@ fi
 ################################################################################
 # Now, let's create the YSFE build package from the yicf, and install it:
 echo "Creating the YSFE build package from its yicf..."
-rm pkg/yellowstone_frontend_build-*.tgz &> /dev/null
-(cd pkg && yinst_create --clean -t $BUILD_TYPE yellowstone_frontend_build.yicf)
-if [[ `ls pkg/yellowstone_frontend_build-*.tgz | wc -l` -eq 0 ]]; then
-    echo "Failed to create yellowstone_frontend_build package."; exit 1;
+rm pkg/ysfe_build-*.tgz &> /dev/null
+(cd pkg && yinst_create --clean -t $BUILD_TYPE ysfe_build.yicf)
+if [[ `ls pkg/ysfe_build-*.tgz | wc -l` -eq 0 ]]; then
+    echo "Failed to create ysfe_build package."; exit 1;
 fi
 
 echo "Installing newly-built YSFE build package..."
-sudo yinst install -br test pkg/yellowstone_frontend_build-*.tgz
+sudo yinst install -br test pkg/ysfe_build-*.tgz
 [[ $? -ne 0 ]] && { echo "Install of build package failed."; exit 1; }
 
 ################################################################################
@@ -97,27 +97,37 @@ fi
 # Clears any older yicfs already generated, plus their derived packages:
 (cd pkg && make clean &> /dev/null)
 
-# Build and install the YSFE server package, yellowstone_frontend. This one is
-# important because other packages (most notably the metapackage) will depend
-# on it being installed (since they reference its version via "ROOT ROOT_MAX").
+# Build and install both the YSFE server package, ysfe, and the YSFE config
+# package, ysfe_conf. This is important to do here because other packages (the
+# metapackages) will depend on their being installed (since their version
+# numbers are referenced via "ROOT ROOT_MAX").
 echo "Creating the YSFE server package..."
-rm -rf pkg/yellowstone_frontend-*.tgz &> /dev/null
-(cd pkg && yinst_create -t $BUILD_TYPE yellowstone_frontend.yicf)
+rm -rf pkg/ysfe-*.tgz &> /dev/null
+(cd pkg && yinst_create -t $BUILD_TYPE ysfe.yicf)
 [[ $? -ne 0 ]] && { echo "Failed to create YSFE server package."; exit 1; }
 echo "Server package created, installing..."
-sudo yinst install -br test pkg/yellowstone_frontend-*.tgz
+sudo yinst install -br test pkg/ysfe-*.tgz
 [[ $? -ne 0 ]] && { echo "Failed to install YSFE server package."; exit 1; }
+
+echo "Creating the YSFE config package..."
+rm -rf pkg/ysfe_conf-*.tgz &> /dev/null
+(cd pkg && yinst_create -t $BUILD_TYPE ysfe_conf.yicf)
+[[ $? -ne 0 ]] && { echo "Failed to create YSFE config package."; exit 1; }
+echo "Conf package created, installing..."
+sudo yinst install -br test pkg/ysfe_conf-*.tgz
+[[ $? -ne 0 ]] && { echo "Failed to install YSFE config package."; exit 1; }
 
 # Now we can build all the conf and meta package yicfs using the pkg/ perl
 # scripts, and from the yicfs we'll build the packages themselves.
-echo "Creating package yicfs via generation scripts..."
-(cd pkg && make gen_all)
-[[ $? -ne 0 ]] && { echo "Failed to generate pkg/ yicfs."; exit 1; }
+echo "Creating YSFE dev package yicfs via the gen_dev target..."
+(cd pkg && make gen_dev)
+[[ $? -ne 0 ]] && { echo "Failed to generate dev yicfs."; exit 1; }
 (cd pkg && make package-$BUILD_TYPE)
 [[ $? -ne 0 ]] && { echo "Problem building packages."; exit 1; }
-# Remove the build/server packages we just created, in favor of the older ones:
-(cd pkg && rm `ls yellowstone_frontend-*.tgz | sort -n | tail -1`)
-(cd pkg && rm `ls yellowstone_frontend_build-*.tgz | sort -n | tail -1`)
+# Remove the new build/server/conf packages, in favor of the existing ones:
+(cd pkg && rm `ls ysfe-*.tgz | sort -n | tail -1`)
+(cd pkg && rm `ls ysfe_build-*.tgz | sort -n | tail -1`)
+(cd pkg && rm `ls ysfe_conf-*.tgz | sort -n | tail -1`)
 
 # Don't forget to build the tools/ packages, as well.
 echo "Building YSFE tools package..."
