@@ -15,6 +15,8 @@ alias fineliberty='ssh -q fineliberty'
 alias dev42='ssh dev42'
 alias web48='ssh web48'
 
+alias vimo='vim -O'
+
 # Start keychain to store passphrases:
 if [[ -e /usr/bin/keychain ]]; then
     if [[ -e ~/.keychain ]]; then
