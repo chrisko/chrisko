@@ -30,10 +30,10 @@ yroot columbo_test --cmd &quot;yinst install perlbase&quot;
 yroot columbo_test --cmd &quot;yinst install -br test ~/.hudson/jobs/columbo/lastStable/archive/pkg/yellowstone_columbo_perl-*.tgz&quot;
 yroot columbo_test --cmd &quot;~/src/ckoenig/hudson/columbo_syntax_check.sh&quot;
 
-scp ~/.hudson/jobs/columbo/lastStable/archive/pkg/yellowstone_columbo_perl-*.tgz af1181.yss.ac4.yahoo.com:/tmp/latest_columbo_package.tgz
-ssh af1181.yss.ac4.yahoo.com &quot;sudo yinst install perlbase; sudo yinst install -br test /tmp/latest_columbo_package.tgz&quot;
+scp ~/.hudson/jobs/columbo/lastStable/archive/pkg/yellowstone_columbo_perl-*.tgz af1183.yss.ac4.yahoo.com:/tmp/latest_columbo_package.tgz
+ssh af1183.yss.ac4.yahoo.com &quot;sudo yinst install perlbase; sudo yinst install -br test /tmp/latest_columbo_package.tgz&quot;
 
-~/src/ckoenig/hudson/remove_yroot.sh columbo_test</command>
+# ~/src/ckoenig/hudson/remove_yroot.sh columbo_test</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

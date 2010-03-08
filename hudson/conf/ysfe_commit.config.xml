@@ -18,13 +18,14 @@
         <hudson.plugins.batch__task.BatchTask>
           <name>regenerate_ysfe_yroot</name>
           <script>~/src/ckoenig/hudson/create_or_overwrite_yroot.sh ysfe --i386 4.8-20090518&#xd;
-yroot ysfe --cmd &quot;yinst install ~/.hudson/jobs/ysfe/lastStable/archive/pkg/yellowstone_frontend_build-*.tgz -br test&quot;</script>
+yroot ysfe --cmd &quot;yinst install ~/.hudson/jobs/ysfe/lastStable/archive/pkg/ysfe_build-*.tgz -br test&quot;</script>
         </hudson.plugins.batch__task.BatchTask>
       </tasks>
     </hudson.plugins.batch__task.BatchTaskProperty>
     <hudson.plugins.disk__usage.DiskUsageProperty/>
   </properties>
   <scm class="hudson.plugins.git.GitSCM">
+    <configVersion>1</configVersion>
     <remoteRepositories>
       <org.spearce.jgit.transport.RemoteConfig>
         <string>origin</string>
@@ -43,11 +44,12 @@ yroot ysfe --cmd &quot;yinst install ~/.hudson/jobs/ysfe/lastStable/archive/pkg/
     </remoteRepositories>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/2.1-rel</name>
+        <name>**/trunk</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <mergeOptions/>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <clean>false</clean>
     <submoduleCfg class="list"/>
   </scm>
   <canRoam>true</canRoam>

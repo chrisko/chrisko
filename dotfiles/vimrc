@@ -44,11 +44,13 @@ set mat=2
 " And disable the constant highlighting
 let loaded_matchparen = 1
 
+" Enable highlighting on searches
+set hlsearch
+
 " Bash-style filename completion
 set wildmode=longest,list
 " Ignoring these file suffixes:
 set wildignore=*~,#*#,*.o,*.class
-"
 
 " Turn off the bell
 set vb t_vb=
@@ -93,6 +95,9 @@ map <silent> <Down> gj
 " Enable in-column up and down for wrapped lines in INSERT mode
 imap <silent> <Up>   <C-o>gk
 imap <silent> <Down> <C-o>gj
+
+" Press Space to turn off highlighting and clear any message already displayed.
+:nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 " Map backspace to delete previous character
 nmap <BS> <Esc><C-V><BS><Esc>

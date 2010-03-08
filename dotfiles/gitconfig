@@ -1,12 +1,11 @@
 [user]
 	name = Chris Koenig
 	email = ckoenig@yahoo-inc.com
+
 [color]
 	branch = auto
 	diff = auto
 	status = auto
-[alias]
-	ci = commit
-	co = checkout
+
 [github]
 	user = chrisko

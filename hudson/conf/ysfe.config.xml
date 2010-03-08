@@ -26,6 +26,7 @@
     <hudson.plugins.disk__usage.DiskUsageProperty/>
   </properties>
   <scm class="hudson.plugins.git.GitSCM">
+    <configVersion>1</configVersion>
     <remoteRepositories>
       <org.spearce.jgit.transport.RemoteConfig>
         <string>origin</string>
@@ -44,11 +45,15 @@
     </remoteRepositories>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/2.2-rel</name>
+        <name>**</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <mergeOptions/>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <clean>false</clean>
+    <browser>
+      <url>http://pathwith.greatamerica.corp.yahoo.com/git/gitweb.cgi/?p=ysfe/.git</url>
+    </browser>
     <submoduleCfg class="list"/>
   </scm>
   <canRoam>true</canRoam>
@@ -75,13 +80,9 @@ yroot ysfe_build --cmd &quot;cd $WORKSPACE &amp;&amp; ~/src/ckoenig/hudson/ysfe_
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>pkg/yellowstone_frontend*.tgz, pkg/ysfe_meta_conf_*.tgz, tools/yellowstone_frontend_tools-*.tgz</artifacts>
+      <artifacts>pkg/ysfe*.tgz, tools/yellowstone_*.tgz</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
-    <hudson.tasks.Fingerprinter>
-      <targets></targets>
-      <recordBuildArtifacts>true</recordBuildArtifacts>
-    </hudson.tasks.Fingerprinter>
     <hudson.tasks.BuildTrigger>
       <childProjects>ysfe_deploy</childProjects>
       <threshold>
@@ -90,6 +91,10 @@ yroot ysfe_build --cmd &quot;cd $WORKSPACE &amp;&amp; ~/src/ckoenig/hudson/ysfe_
         <color>BLUE</color>
       </threshold>
     </hudson.tasks.BuildTrigger>
+    <hudson.tasks.Fingerprinter>
+      <targets></targets>
+      <recordBuildArtifacts>true</recordBuildArtifacts>
+    </hudson.tasks.Fingerprinter>
     <hudson.plugins.cppunit.CppUnitPublisher>
       <testResultsPattern>tests/test_results.xml</testResultsPattern>
       <useWorkspaceBaseDir>true</useWorkspaceBaseDir>
