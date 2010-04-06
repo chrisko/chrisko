@@ -57,7 +57,7 @@
     <submoduleCfg class="list"/>
   </scm>
   <canRoam>true</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
     <hudson.triggers.SCMTrigger>
@@ -95,10 +95,6 @@ yroot ysfe_build --cmd &quot;cd $WORKSPACE &amp;&amp; ~/src/ckoenig/hudson/ysfe_
       <targets></targets>
       <recordBuildArtifacts>true</recordBuildArtifacts>
     </hudson.tasks.Fingerprinter>
-    <hudson.plugins.cppunit.CppUnitPublisher>
-      <testResultsPattern>tests/test_results.xml</testResultsPattern>
-      <useWorkspaceBaseDir>true</useWorkspaceBaseDir>
-    </hudson.plugins.cppunit.CppUnitPublisher>
     <hudson.plugins.doxygen.DoxygenArchiver>
       <doxyfilePath>doc/Doxyfile</doxyfilePath>
       <keepAll>false</keepAll>

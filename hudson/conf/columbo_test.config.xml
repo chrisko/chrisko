@@ -23,17 +23,25 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>~/src/ckoenig/hudson/create_or_overwrite_yroot.sh columbo_test --i386 4.8-20090518
+      <command>#~/src/ckoenig/hudson/create_or_overwrite_yroot.sh columbo_test --i386 4.8-20090518
 echo $COLUMBO_BUILD
 
-yroot columbo_test --cmd &quot;yinst install perlbase&quot;
+PERLPREREQS=&quot;perlbase perl58_compat&quot;
+
+yroot columbo_test --cmd &quot;yinst install $PERLPREREQS&quot;
 yroot columbo_test --cmd &quot;yinst install -br test ~/.hudson/jobs/columbo/lastStable/archive/pkg/yellowstone_columbo_perl-*.tgz&quot;
 yroot columbo_test --cmd &quot;~/src/ckoenig/hudson/columbo_syntax_check.sh&quot;
 
-scp ~/.hudson/jobs/columbo/lastStable/archive/pkg/yellowstone_columbo_perl-*.tgz af1183.yss.ac4.yahoo.com:/tmp/latest_columbo_package.tgz
-ssh af1183.yss.ac4.yahoo.com &quot;sudo yinst install perlbase; sudo yinst install -br test /tmp/latest_columbo_package.tgz&quot;
+GATEWAYS=&quot;af1183.yss.ac4.yahoo.com ysadm1000.yss.ac2.yahoo.com ysadm1000.yss.sk1.yahoo.com&quot;
+for HOST in $GATEWAYS; do
+    scp ~/.hudson/jobs/columbo/lastStable/archive/pkg/yellowstone_columbo_perl-*.tgz $HOST:/tmp/latest_columbo_package.tgz
+    ssh $HOST &quot;sudo yinst install $PERLPREREQS; sudo yinst install -br test /tmp/latest_columbo_package.tgz&quot;
+done
 
-# ~/src/ckoenig/hudson/remove_yroot.sh columbo_test</command>
+# Now that it&apos;s working elsewhere, install it outside of the yroot:
+yinst install -br test ~/.hudson/jobs/columbo/lastStable/archive/pkg/yellowstone_columbo_perl-*.tgz
+
+#~/src/ckoenig/hudson/remove_yroot.sh columbo_test</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

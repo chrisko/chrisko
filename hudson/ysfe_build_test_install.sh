@@ -37,7 +37,7 @@ yinst ls yahoo_cfg_dev
 if [[ $? -ne 0 ]]; then
     echo "Cannot find yahoo_cfg_dev. Installing version 2.8.14..."
     # This particular version is required by the build package:
-    sudo yinst install yahoo_cfg_dev-2.8.14
+    sudo yinst install yahoo_cfg_dev-2.8.14 perlbase-1.7.1_01
     [[ $? -ne 0 ]] && { echo "Install of yahoo_cfg_dev failed."; exit 1; }
 fi
 
@@ -122,17 +122,22 @@ sudo yinst install -br test pkg/ysfe_conf-*.tgz
 echo "Creating YSFE dev package yicfs via the gen_dev target..."
 (cd pkg && make gen_dev)
 [[ $? -ne 0 ]] && { echo "Failed to generate dev yicfs."; exit 1; }
+echo "Building YSFE $BUILD_TYPE packages..."
 (cd pkg && make package-$BUILD_TYPE)
 [[ $? -ne 0 ]] && { echo "Problem building packages."; exit 1; }
 # Remove the new build/server/conf packages, in favor of the existing ones:
-(cd pkg && rm `ls ysfe-*.tgz | sort -n | tail -1`)
-(cd pkg && rm `ls ysfe_build-*.tgz | sort -n | tail -1`)
-(cd pkg && rm `ls ysfe_conf-*.tgz | sort -n | tail -1`)
+(cd pkg && rm `ls -t ysfe-*.tgz | head -1`)
+(cd pkg && rm `ls -t ysfe_build-*.tgz | head -1`)
+(cd pkg && rm `ls -t ysfe_conf-*.tgz | head -1`)
+echo "Generating and building YSFE flattened strict metapackage..."
+(cd pkg && make flat_strict_meta_yicf)
+[[ $? -ne 0 ]] && { echo "Problem building flat strict meta yicf."; exit 1; }
+(cd pkg && yinst_create -t $BUILD_TYPE ysfe_flat_strict_meta.yicf)
+[[ $? -ne 0 ]] && { echo "Problem building flat strict metapackage."; exit 1; }
 
-# Don't forget to build the tools/ packages, as well.
-echo "Building YSFE tools package..."
-rm -rf tools/yellowstone_frontend_tools-*.tgz &> /dev/null
-(cd tools && make package-$BUILD_TYPE)
-[[ $? -ne 0 ]] && { echo "Failed to build tools package."; exit 1; }
+# Don't forget to build the tools/ source, as well.
+#echo "Building YSFE tools source..."
+#(cd tools && make)
+#[[ $? -ne 0 ]] && { echo "Failed to build tools source."; exit 1; }
 
 echo "Success! YSFE built successfully."

@@ -8,7 +8,6 @@ set nocompatible
 
 " Keep the indenting of the last line
 set autoindent
-
 " Increase indent when last line ends with {
 set smartindent
 
@@ -17,7 +16,6 @@ set ruler
 
 " Make sure status line is always visible
 set laststatus=2
-
 " Custom status line
 if has("statusline")
     set statusline=%<%f\ %h%m%r%=%k[%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %-12.(%l,%c%V%)\ %P 
@@ -33,7 +31,6 @@ set expandtab
 
 " Insert this many spaces for a tab
 set tabstop=4
-
 " Insert this many spaces for an indentation
 set shiftwidth=4
 
@@ -54,12 +51,6 @@ set wildignore=*~,#*#,*.o,*.class
 
 " Turn off the bell
 set vb t_vb=
-
-" Set F8 to toggle syntax
-map <silent> <F8> :if exists("syntax_on")<Bar>syntax off<Bar>else<Bar>syntax on<Bar>endif<CR>
-
-" Set F7 to retab file, remove whitespace from end of lines
-map <silent> <F7> :%s/\s\+$//g<CR>:retab<CR>
 
 " In insert mode, allow backspace over anything (line breaks, text beyond this insert session, indentations)
 set backspace=eol,start,indent
@@ -89,6 +80,24 @@ set bex=.bak
 set backup
 
 """" MAPPINGS """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Set F6 to highlight lines longer than 80 characters, and erroneous spaces:
+highlight BadSpacesAndLines ctermbg=green guibg=green
+nnoremap <silent> <F6>
+      \ :if exists('w:long_line_match') <Bar>
+      \   :match none <Bar>
+      \   unlet w:long_line_match <Bar>
+      \ else <Bar>
+      \   :match BadSpacesAndLines /.\%>80v.\+/ <Bar>
+      \   let w:long_line_match = 1 <Bar>
+      \ endif<CR>
+
+" Set F7 to retab file, remove whitespace from end of lines
+map <silent> <F7> :%s/\s\+$//g<CR>:retab<CR>
+
+" Set F8 to toggle syntax
+map <silent> <F8> :if exists("syntax_on")<Bar>syntax off<Bar>else<Bar>syntax on<Bar>endif<CR>
+
 " Enable in-column up and down for wrapped lines
 map <silent> <Up>   gk
 map <silent> <Down> gj
