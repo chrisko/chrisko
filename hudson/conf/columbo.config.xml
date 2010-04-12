@@ -7,6 +7,7 @@
     <hudson.plugins.disk__usage.DiskUsageProperty/>
   </properties>
   <scm class="hudson.plugins.git.GitSCM">
+    <configVersion>1</configVersion>
     <remoteRepositories>
       <org.spearce.jgit.transport.RemoteConfig>
         <string>origin</string>
@@ -25,21 +26,19 @@
     </remoteRepositories>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*</name>
+        <name>**</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <mergeOptions/>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <clean>false</clean>
     <submoduleCfg class="list"/>
   </scm>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector">
-    <hudson.triggers.SCMTrigger>
-      <spec>*/1     *     *     *     *</spec>
-    </hudson.triggers.SCMTrigger>
-  </triggers>
+  <authToken>f81nbl196x</authToken>
+  <triggers class="vector"/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
@@ -48,11 +47,6 @@
     </hudson.tasks.Shell>
   </builders>
   <publishers>
-    <hudson.tasks.ArtifactArchiver>
-      <artifacts>pkg/yellowstone_columbo_perl-*.tgz</artifacts>
-      <latestOnly>false</latestOnly>
-    </hudson.tasks.ArtifactArchiver>
-    <hudson.tasks.test.AggregatedTestResultPublisher/>
     <hudson.tasks.BuildTrigger>
       <childProjects>columbo_test</childProjects>
       <threshold>
@@ -61,6 +55,11 @@
         <color>BLUE</color>
       </threshold>
     </hudson.tasks.BuildTrigger>
+    <hudson.tasks.test.AggregatedTestResultPublisher/>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>pkg/yellowstone_columbo_perl-*.tgz</artifacts>
+      <latestOnly>false</latestOnly>
+    </hudson.tasks.ArtifactArchiver>
   </publishers>
   <buildWrappers/>
 </project>
