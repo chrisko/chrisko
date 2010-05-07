@@ -1,27 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Per-commit build of the Yellowstone Frontend server.</description>
+  <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
-          <name>YSFE_YROOT_NAME</name>
-          <description>The (existing!) yroot in which to build YSFE.</description>
-          <defaultValue>ysfe</defaultValue>
+          <name>YROOT_IMAGE</name>
+          <description></description>
+          <defaultValue>4.8-20090518</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
-    <hudson.plugins.batch__task.BatchTaskProperty>
-      <tasks>
-        <hudson.plugins.batch__task.BatchTask>
-          <name>regenerate_ysfe_yroot</name>
-          <script>~/src/ckoenig/hudson/create_or_overwrite_yroot.sh ysfe --i386 4.8-20090518&#xd;
-yroot ysfe --cmd &quot;yinst install ~/.hudson/jobs/ysfe/lastStable/archive/pkg/ysfe_build-*.tgz -br test&quot;</script>
-        </hudson.plugins.batch__task.BatchTask>
-      </tasks>
-    </hudson.plugins.batch__task.BatchTaskProperty>
     <hudson.plugins.disk__usage.DiskUsageProperty/>
   </properties>
   <scm class="hudson.plugins.git.GitSCM">
@@ -37,20 +28,22 @@ yroot ysfe --cmd &quot;yinst install ~/.hudson/jobs/ysfe/lastStable/archive/pkg/
         <string>uploadpack</string>
         <string>git-upload-pack</string>
         <string>url</string>
-        <string>/home/ckoenig/src/ysfe</string>
+        <string>/home/ckoenig/src/rise_srv</string>
         <string>tagopt</string>
         <string></string>
       </org.spearce.jgit.transport.RemoteConfig>
     </remoteRepositories>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>**/trunk</name>
+        <name>**</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <mergeOptions/>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
     <clean>false</clean>
-    <choosingStrategy>Default</choosingStrategy>
+    <browser>
+      <url>http://pathwith.greatamerica.corp.yahoo.com/git/gitweb.cgi/?p=rise_srv/.git</url>
+    </browser>
     <submoduleCfg class="list"/>
   </scm>
   <canRoam>true</canRoam>
@@ -58,30 +51,20 @@ yroot ysfe --cmd &quot;yinst install ~/.hudson/jobs/ysfe/lastStable/archive/pkg/
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
     <hudson.triggers.SCMTrigger>
-      <spec>*/1     *     *     *     *</spec>
+      <spec>*/5     *     *     *     *</spec>
     </hudson.triggers.SCMTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
       <command>git clean -df
-yroot $YSFE_YROOT_NAME --cmd &quot;cd $WORKSPACE &amp;&amp; ~/src/ckoenig/hudson/ysfe_build_test_install.sh test&quot;</command>
+~/src/ckoenig/hudson/create_or_overwrite_yroot.sh rise_srv_build --i386 $YROOT_IMAGE
+yroot rise_srv_build --cmd &quot;yinst install perlbase perl58_compat yahoo_cfg_dev-2.8.14 yinst_create&quot;
+yroot rise_srv_build --cmd &quot;cd $WORKSPACE/prereq &amp;&amp; yinst_create --clean ./yr_rise_serving_bld.yicf &amp;&amp; yinst install ./yr_rise_serving_build-*.tgz -br test&quot;
+yroot rise_srv_build --cmd &quot;cd $WORKSPACE &amp;&amp; make&quot;
+~/src/ckoenig/hudson/remove_yroot.sh rise_srv_build</command>
     </hudson.tasks.Shell>
   </builders>
-  <publishers>
-    <hudson.plugins.doxygen.DoxygenArchiver>
-      <doxyfilePath>doc/Doxyfile</doxyfilePath>
-      <keepAll>false</keepAll>
-    </hudson.plugins.doxygen.DoxygenArchiver>
-    <com.thalesgroup.hudson.plugins.xunit.XUnitPublisher>
-      <types>
-        <hudson.plugins.cppunit.CppUnitType>
-          <pattern>tests/test_results.xml</pattern>
-          <faildedIfNotNew>false</faildedIfNotNew>
-          <deleteJUnitFiles>true</deleteJUnitFiles>
-        </hudson.plugins.cppunit.CppUnitType>
-      </types>
-    </com.thalesgroup.hudson.plugins.xunit.XUnitPublisher>
-  </publishers>
+  <publishers/>
   <buildWrappers/>
 </project>

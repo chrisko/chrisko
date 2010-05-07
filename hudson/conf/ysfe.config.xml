@@ -8,7 +8,7 @@
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
           <name>YROOT_IMAGE</name>
-          <description>The yroot image in which to build YSFE. See &quot;ysfe --images&quot; for a complete list. The default is RHEL4 u8.</description>
+          <description>The yroot image in which to build YSFE. See &quot;yroot --images&quot; for a complete list. The default is RHEL4 u8.</description>
           <defaultValue>4.8-20090518</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
@@ -57,7 +57,7 @@
     <submoduleCfg class="list"/>
   </scm>
   <canRoam>true</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
     <hudson.triggers.SCMTrigger>
@@ -80,9 +80,13 @@ yroot ysfe_build --cmd &quot;cd $WORKSPACE &amp;&amp; ~/src/ckoenig/hudson/ysfe_
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>pkg/ysfe*.tgz, tools/yellowstone_*.tgz</artifacts>
+      <artifacts>pkg/ysfe*.tgz</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.Fingerprinter>
+      <targets></targets>
+      <recordBuildArtifacts>true</recordBuildArtifacts>
+    </hudson.tasks.Fingerprinter>
     <hudson.tasks.BuildTrigger>
       <childProjects>ysfe_deploy</childProjects>
       <threshold>
@@ -91,10 +95,6 @@ yroot ysfe_build --cmd &quot;cd $WORKSPACE &amp;&amp; ~/src/ckoenig/hudson/ysfe_
         <color>BLUE</color>
       </threshold>
     </hudson.tasks.BuildTrigger>
-    <hudson.tasks.Fingerprinter>
-      <targets></targets>
-      <recordBuildArtifacts>true</recordBuildArtifacts>
-    </hudson.tasks.Fingerprinter>
     <hudson.plugins.doxygen.DoxygenArchiver>
       <doxyfilePath>doc/Doxyfile</doxyfilePath>
       <keepAll>false</keepAll>

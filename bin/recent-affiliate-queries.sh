@@ -22,13 +22,10 @@ DD_DIRECTORY="/mnt/dd_data/rawlogs/$DATE$NOON_OR_MIDNIGHT/affiliate_production"
     # Uniq the queries in-place, without sorting
     # Make sure the output encoding is always utf8
 #ssh $DAISYS_DESKTOP "cat $DD_DIRECTORY/access.*.{$COLOS}.yahoo.com.*.gz" \
-ssh $DAISYS_DESKTOP "cat $DD_DIRECTORY/access.*.{$COLOS}.yahoo.com.*.gz" \
-    | zcat \
+ssh $DAISYS_DESKTOP "zcat $DD_DIRECTORY/access.*.{$COLOS}.yahoo.com.*.gz" \
     | perl -ne "/GET (.+?) HTTP/ or next; print \"http://affiliate\$1\n\";" \
     | perl -ne "use URI; use URI::QueryParam; chomp; my \$u = URI->new(\$_); print \$u->query_param('Keywords') . \"\n\";" \
-    | perl -ne "print if /\S/;" \
-    | perl -e "my %queries = (); while (<>){ print "\$_" unless (exists \$queries{\$_}); \$queries{\$_} ||= 1; }" \
-    | perl -ne "binmode(STDIN, ':utf8'); binmode(STDOUT, ':utf8'); print;"
+    | perl -ne "print if /\S/;"
 
 # List DD access logs:
 #ssh $DAISYS_DESKTOP "ls /mnt/dd_data/rawlogs/$DATE$NOON_OR_MIDNIGHT/affiliate_production/access.*.{$COLOS}.yahoo.com.*.gz"

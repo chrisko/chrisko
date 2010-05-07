@@ -37,7 +37,7 @@ yinst ls yahoo_cfg_dev
 if [[ $? -ne 0 ]]; then
     echo "Cannot find yahoo_cfg_dev. Installing version 2.8.14..."
     # This particular version is required by the build package:
-    sudo yinst install yahoo_cfg_dev-2.8.14 perlbase-1.7.1_01
+    sudo yinst install yahoo_cfg_dev-2.8.14 perlbase perl58_compat
     [[ $? -ne 0 ]] && { echo "Install of yahoo_cfg_dev failed."; exit 1; }
 fi
 

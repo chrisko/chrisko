@@ -2,12 +2,6 @@
 <project>
   <actions/>
   <description></description>
-  <logRotator>
-    <daysToKeep>21</daysToKeep>
-    <numToKeep>-1</numToKeep>
-    <artifactDaysToKeep>-1</artifactDaysToKeep>
-    <artifactNumToKeep>-1</artifactNumToKeep>
-  </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.plugins.disk__usage.DiskUsageProperty/>
@@ -25,7 +19,7 @@
         <string>uploadpack</string>
         <string>git-upload-pack</string>
         <string>url</string>
-        <string>/home/ckoenig/src/columbo</string>
+        <string>/home/ckoenig/src/rise</string>
         <string>tagopt</string>
         <string></string>
       </org.spearce.jgit.transport.RemoteConfig>
@@ -38,37 +32,27 @@
     <mergeOptions/>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
     <clean>false</clean>
-    <choosingStrategy>Default</choosingStrategy>
+    <browser>
+      <url>http://pathwith.greatamerica.corp.yahoo.com/git/gitweb.cgi/?p=rise/.git</url>
+    </browser>
     <submoduleCfg class="list"/>
   </scm>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <authToken>f81nbl196x</authToken>
-  <triggers class="vector"/>
+  <triggers class="vector">
+    <hudson.triggers.SCMTrigger>
+      <spec>*/5     *     *     *     *</spec>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>#~/src/ckoenig/hudson/create_or_overwrite_yroot.sh columbo_test --i386 4.8-20090518
-git clean -df
-yroot columbo_test --cmd &quot;yinst install yahoo_cfg_dev-2.8.14 perlbase perl58_compat&quot;
-yroot columbo_test --cmd &quot;cd $WORKSPACE/pkg &amp;&amp; make package&quot;</command>
+      <command>git clean -df
+~/src/ckoenig/hudson/create_or_overwrite_yroot.sh rise_build --i386 4.8-20090518
+yroot rise_build --cmd &quot;yinst install yahoo_cfg_dev-2.8.14 perlbase perl58_compat &amp;&amp; cd $WORKSPACE &amp;&amp; make&quot;</command>
     </hudson.tasks.Shell>
   </builders>
-  <publishers>
-    <hudson.tasks.ArtifactArchiver>
-      <artifacts>pkg/yellowstone_columbo_perl-*.tgz</artifacts>
-      <latestOnly>false</latestOnly>
-    </hudson.tasks.ArtifactArchiver>
-    <hudson.tasks.test.AggregatedTestResultPublisher/>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>columbo_test</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
-  </publishers>
+  <publishers/>
   <buildWrappers/>
 </project>
