@@ -32,13 +32,14 @@
     <mergeOptions/>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
     <clean>false</clean>
+    <choosingStrategy>Default</choosingStrategy>
     <browser>
       <url>http://pathwith.greatamerica.corp.yahoo.com/git/gitweb.cgi/?p=rise/.git</url>
     </browser>
     <submoduleCfg class="list"/>
   </scm>
   <canRoam>true</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
     <hudson.triggers.SCMTrigger>

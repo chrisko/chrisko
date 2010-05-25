@@ -7,18 +7,19 @@ export FINELIBERTY=pathwith.greatamerica.corp.yahoo.com
 export PERLLIB=$PERLLIB~/src/perl:~/src/git/perl
 export PERLLIB=$PERLLIB:/home/y/lib/perl5/site_perl/5.8.6
 export PERLLIB=$PERLLIB:/home/y/lib/perl5/site_perl/5.8
-export PERLLIB=$PERLLIB:/home/y/lib/perl5/5.8
 export PERLLIB=$PERLLIB:/home/y/lib/perl5/site_perl
+export PERLLIB=$PERLLIB:/home/y/lib/perl5/5.8
 
 export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/lib/pkgconfig
 
+# Setting up PATH. 
+export PATH=/usr/local/bin:/home/y/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/sbin
 [[ -e ~/src/bin ]] && export PATH=$PATH:~/src/bin
 [[ -e ~/src/ckoenig/bin ]] && export PATH=$PATH:~/src/ckoenig/bin
 [[ -e ~/src/git ]] && export PATH=$PATH:~/src/git
 [[ -e ~/src/tig ]] && export PATH=$PATH:~/src/tig
 [[ -e ~/src/R/bin ]] && export PATH=$PATH:~/src/R/bin
-[[ -e /sw/bin ]] && export PATH=$PATH:/sw/bin
 
 export CVSROOT=vault.yahoo.com:/CVSROOT
 export CVS_RSH=/usr/bin/ssh
@@ -40,10 +41,3 @@ export SVN_EDITOR=vim
 
 export ROOT=${ROOT:-/home/y}
 [[ -e $ROOT ]] && export PATH=$ROOT/bin:$ROOT/sbin:$PATH
-
-if [[ -e /sw/Applications/AquaTerm.app ]]; then
-  export GNUTERM="aqua"
-  export AQUATERM_PATH="/sw/Applications/AquaTerm.app"
-fi
-
-[[ -e /sw/bin/init.sh ]] && . /sw/bin/init.sh

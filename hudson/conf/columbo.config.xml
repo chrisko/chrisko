@@ -49,7 +49,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>#~/src/ckoenig/hudson/create_or_overwrite_yroot.sh columbo_test --i386 4.8-20090518
+      <command>~/src/ckoenig/hudson/create_or_overwrite_yroot.sh columbo_test 4.5-20070411
 git clean -df
 yroot columbo_test --cmd &quot;yinst install yahoo_cfg_dev-2.8.14 perlbase perl58_compat&quot;
 yroot columbo_test --cmd &quot;cd $WORKSPACE/pkg &amp;&amp; make package&quot;</command>

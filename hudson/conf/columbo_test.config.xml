@@ -49,7 +49,7 @@ done
 # Now that it&apos;s working elsewhere, install it outside of the yroot:
 yinst install -br test ~/.hudson/jobs/columbo/lastStable/archive/pkg/yellowstone_columbo_perl-*.tgz
 
-#~/src/ckoenig/hudson/remove_yroot.sh columbo_test</command>
+~/src/ckoenig/hudson/remove_yroot.sh columbo_test</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
