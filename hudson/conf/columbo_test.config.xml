@@ -24,7 +24,7 @@
 yroot columbo_test --cmd &quot;yinst install -br test ~/.hudson/jobs/columbo/lastStable/archive/pkg/yellowstone_columbo_perl-*.tgz&quot;
 yroot columbo_test --cmd &quot;~/src/ckoenig/hudson/columbo_syntax_check.sh&quot;
 
-GATEWAYS=&quot;af1183.yss.ac4.yahoo.com ysadm1000.yss.ac2.yahoo.com ysadm1001.yss.sk1.yahoo.com&quot;
+GATEWAYS=(af1183.yss.ac4.yahoo.com ysadm1000.yss.ac2.yahoo.com ysadm1001.yss.sk1.yahoo.com)
 for HOST in $GATEWAYS; do
     scp ~/.hudson/jobs/columbo/lastStable/archive/pkg/yellowstone_columbo_perl-*.tgz $HOST:/tmp/latest_columbo_package.tgz
     ssh $HOST &quot;sudo /usr/local/bin/yinst install perlbase perl58_compat&quot;
@@ -32,8 +32,9 @@ for HOST in $GATEWAYS; do
 done
 
 echo &quot;Running test scripts in t/ directory...&quot;
-for TEST in `ls /home/ckoenig/.hudson/jobs/columbo/workspace/src/perl/t/*.pl`; do
-    yroot columbo_test --cmd &quot;$TEST&quot;
+TEST_FILES=`ls /home/ckoenig/.hudson/jobs/columbo/workspace/src/perl/t/*.pl`
+for TEST in ${=TEST_FILES}; do
+    yroot columbo_test --cmd &quot;/usr/local/bin/perl $TEST&quot;
 done
 
 # Now that it&apos;s working elsewhere, install it outside of the yroot:
