@@ -10,20 +10,16 @@ bindkey -v
 set nobeep
 
 # Set up aliases
-alias ifind='find . -iname'
 alias fineliberty='ssh -q fineliberty'
-alias dev42='ssh dev42'
-alias web48='ssh web48'
-
 alias vimo='vim -O'
+alias ifind='find . -iname'
+alias cd..="cd .."
 
 # Start keychain to store passphrases:
-if [[ -e /usr/bin/keychain ]]; then
-    if [[ -e ~/.keychain ]]; then
-        [[ `ls ~/.keychain/*-sh | wc -l` -gt 0 ]] && source ~/.keychain/*-sh
-        /usr/bin/keychain --nogui ~/.ssh/id_rsa ~/.ssh/id_dsa ~/.ssh/identity > /dev/null 2> /dev/null
-    fi
-fi
+KEYCHAIN_SOURCE=~/.keychain/`hostname`-sh
+[[ -e $KEYCHAIN_SOURCE ]] && source $KEYCHAIN_SOURCE
+[[ -e /usr/bin/keychain ]] && /usr/bin/keychain -q -Q --nogui ~/.ssh/id_rsa ~/.ssh/id_dsa
+[[ -e $KEYCHAIN_SOURCE ]] && source $KEYCHAIN_SOURCE
 
 # zsh completion
 autoload -U compinit; compinit;
@@ -32,6 +28,3 @@ if [[ -e $HOME/.ssh/known_hosts ]]; then
     hosts=(${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*})
     zstyle ':completion:*' hosts make $hosts
 fi
-
-# Aliases
-alias cd..="cd .."

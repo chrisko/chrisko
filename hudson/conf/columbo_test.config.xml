@@ -10,15 +10,6 @@
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <hudson.model.ParametersDefinitionProperty>
-      <parameterDefinitions>
-        <hudson.model.RunParameterDefinition>
-          <name>COLUMBO_BUILD</name>
-          <description>Which Columbo build to use for the deploy and test.</description>
-          <projectName>columbo</projectName>
-        </hudson.model.RunParameterDefinition>
-      </parameterDefinitions>
-    </hudson.model.ParametersDefinitionProperty>
     <hudson.plugins.disk__usage.DiskUsageProperty/>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
@@ -29,16 +20,15 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>PERLPREREQS=&quot;perlbase perl58_compat&quot;
-
-yroot columbo_test --cmd &quot;yinst install $PERLPREREQS&quot;
+      <command>yroot columbo_test --cmd &quot;yinst install perlbase perl58_compat&quot;
 yroot columbo_test --cmd &quot;yinst install -br test ~/.hudson/jobs/columbo/lastStable/archive/pkg/yellowstone_columbo_perl-*.tgz&quot;
 yroot columbo_test --cmd &quot;~/src/ckoenig/hudson/columbo_syntax_check.sh&quot;
 
-GATEWAYS=&quot;af1183.yss.ac4.yahoo.com ysadm1001.yss.ac2.yahoo.com ysadm1001.yss.sk1.yahoo.com&quot;
+GATEWAYS=&quot;af1183.yss.ac4.yahoo.com ysadm1000.yss.ac2.yahoo.com ysadm1001.yss.sk1.yahoo.com&quot;
 for HOST in $GATEWAYS; do
     scp ~/.hudson/jobs/columbo/lastStable/archive/pkg/yellowstone_columbo_perl-*.tgz $HOST:/tmp/latest_columbo_package.tgz
-    ssh $HOST &quot;sudo yinst install $PERLPREREQS; sudo yinst install -br test /tmp/latest_columbo_package.tgz&quot;
+    ssh $HOST &quot;sudo /usr/local/bin/yinst install perlbase perl58_compat&quot;
+    ssh $HOST &quot;sudo /usr/local/bin/yinst install -br test /tmp/latest_columbo_package.tgz&quot;
 done
 
 echo &quot;Running test scripts in t/ directory...&quot;

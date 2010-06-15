@@ -2,24 +2,27 @@
 
 export FINELIBERTY=pathwith.greatamerica.corp.yahoo.com
 
-# Augment perl @INC with DM libraries. (Adds a colon if $PERLLIB is already set.)
-[[ -z "$PERLLIB" ]] || export PERLLIB=$PERLLIB:
-export PERLLIB=$PERLLIB~/src/perl:~/src/git/perl
-export PERLLIB=$PERLLIB:/home/y/lib/perl5/site_perl/5.8.6
-export PERLLIB=$PERLLIB:/home/y/lib/perl5/site_perl/5.8
-export PERLLIB=$PERLLIB:/home/y/lib/perl5/site_perl
-export PERLLIB=$PERLLIB:/home/y/lib/perl5/5.8
+# Augment perl @INC with Y! libraries.
+export PERL5LIB=$PERL5LIB~/src/perl:~/src/git/perl
+export PERL5LIB=$PERL5LIB:/usr/lib/perl/vendor_perl/5.8.8/i386-linux-thread-multi/
+export PERL5LIB=$PERL5LIB:/home/y/lib/perl5/site_perl/5.8/i686-linux-64int/auto
+export PERL5LIB=$PERL5LIB:/home/y/lib/perl5/site_perl/5.8/i686-linux-64int/
+export PERL5LIB=$PERL5LIB:/home/y/lib/perl5/site_perl/5.8.6
+export PERL5LIB=$PERL5LIB:/home/y/lib/perl5/site_perl/5.8
+export PERL5LIB=$PERL5LIB:/home/y/lib/perl5/site_perl
+export PERL5LIB=$PERL5LIB:/home/y/lib/perl5/5.8
 
 export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/lib/pkgconfig
 
-# Setting up PATH. 
 export PATH=/usr/local/bin:/home/y/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/sbin
 [[ -e ~/src/bin ]] && export PATH=$PATH:~/src/bin
 [[ -e ~/src/ckoenig/bin ]] && export PATH=$PATH:~/src/ckoenig/bin
 [[ -e ~/src/git ]] && export PATH=$PATH:~/src/git
 [[ -e ~/src/tig ]] && export PATH=$PATH:~/src/tig
 [[ -e ~/src/R/bin ]] && export PATH=$PATH:~/src/R/bin
+
+[[ -e ~/.keychain/`hostname`-sh ]] && source ~/.keychain/`hostname`-sh
 
 export CVSROOT=vault.yahoo.com:/CVSROOT
 export CVS_RSH=/usr/bin/ssh
@@ -28,16 +31,15 @@ export SVNROOT=svn+ssh://svn.corp.yahoo.com/yahoo/ysm/affdm
 export IGOR_PROPERTY=yellowstone
 
 export R_HOME=~/src/R
+export R_LIBS_USER=~/src/canvas/R:~/src/png/R
 
+# Git and gitweb environment variables:
 export GIT_BINDIR=~/src/git/
 export GIT_EXEC_PATH=~/src/git/
 export GITPERLLIB=~/src/git/perl/blib/lib/
 export GITWEB_CONFIG=~/.gitweb
 
-export R_LIBS_USER=~/src/canvas/R:~/src/png/R
-
 export EDITOR=vim
 export SVN_EDITOR=vim
 
 export ROOT=${ROOT:-/home/y}
-[[ -e $ROOT ]] && export PATH=$ROOT/bin:$ROOT/sbin:$PATH
