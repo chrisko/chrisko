@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 COMMAND_NAME=`basename $0`
 USAGE="$COMMAND_NAME [test|release]"
@@ -59,8 +59,13 @@ sudo yinst install -br test pkg/ysfe_build-*.tgz
 ################################################################################
 ## Building the YSFE Source ####################################################
 ################################################################################
+# Make sure there's nothing to mess up the library settings, which are
+# carefully controlled by the Makefile. You might otherwise see runtime symbol
+# lookup errors, such as "undefined symbol: g_return_if_fail_warning".
+LD_LIBRARY_PATH=""
 # Things seem ready, so let's run the build:
 echo "Building the YSFE source..."
+
 (cd src && make)
 [[ $? -ne 0 ]] && { echo "YSFE source build failed."; exit 1; }
 
