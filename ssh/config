@@ -12,7 +12,9 @@ Host corp
 Host mblue
     # http://twiki.corp.yahoo.com/view/GridDocumentation/MithrilBlueClusterInfo
     Hostname mithril-gw.blue.ygrid.yahoo.com
-
 Host mgold
     # http://twiki.corp.yahoo.com/view/GridDocumentation/MithrilGoldClusterInfo
     Hostname mithril-gw.gold.ygrid.yahoo.com
+Host digold
+    # http://twiki.corp.yahoo.com/view/Grid/DilithiumGoldClusterConfigs
+    Hostname dilithium-gw.gold.ygrid.yahoo.com

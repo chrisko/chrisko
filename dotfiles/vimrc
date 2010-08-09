@@ -81,6 +81,9 @@ set backup
 
 """" MAPPINGS """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Let W mean 'save as sudo':
+command W w !sudo tee % >/dev/null
+
 " Set F6 to highlight lines longer than 80 characters, and erroneous spaces:
 highlight BadSpacesAndLines ctermbg=green guibg=green
 nnoremap <silent> <F6>

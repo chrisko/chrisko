@@ -1,8 +1,9 @@
 ################################################################################
 Command-line review posting:
 ################################################################################
-~/src/ckoenig/bin/git-svn-reviewboard.pl HEAD^ | crpost 3191510 --reviewer=awad --reviewer=chai1983 --repo-path svn+ssh://svn.corp.yahoo.com --base-dir svn+ssh://svn.corp.yahoo.com/yahoo/ysm/YSRise/tools/trunk/RESONATOR
-
+~/src/ckoenig/bin/git-svn-reviewboard.pl HEAD^ | crpost 9173810 --reviewer=awad
+    --reviewer=chai1983 --repo-path svn+ssh://svn.corp.yahoo.com
+    --base-dir svn+ssh://svn.corp.yahoo.com/yahoo/blah/blah/blah
 
 ################################################################################
 GUI review posting:
