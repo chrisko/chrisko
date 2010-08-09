@@ -81,6 +81,8 @@ set backup
 
 """" MAPPINGS """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" I do this sometimes.
+command Q quit
 " Let W mean 'save as sudo':
 command W w !sudo tee % >/dev/null
 
