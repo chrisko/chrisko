@@ -28,3 +28,5 @@ if [[ -e $HOME/.ssh/known_hosts ]]; then
     hosts=(${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*})
     zstyle ':completion:*' hosts make $hosts
 fi
+
+REPORTTIME=10  # Print elapsed time if greater than 10s

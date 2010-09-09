@@ -3,7 +3,7 @@
   <actions/>
   <description></description>
   <logRotator>
-    <daysToKeep>21</daysToKeep>
+    <daysToKeep>14</daysToKeep>
     <numToKeep>-1</numToKeep>
     <artifactDaysToKeep>-1</artifactDaysToKeep>
     <artifactNumToKeep>-1</artifactNumToKeep>
@@ -23,7 +23,7 @@
         <string>uploadpack</string>
         <string>git-upload-pack</string>
         <string>url</string>
-        <string>/home/ckoenig/src/columbo</string>
+        <string>/home/ckoenig/src/bing_simulator</string>
         <string>tagopt</string>
         <string></string>
       </org.spearce.jgit.transport.RemoteConfig>
@@ -57,26 +57,20 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>~/src/ckoenig/hudson/create_or_overwrite_yroot.sh columbo_test 4.5-20070411
+      <command>~/src/ckoenig/hudson/create_or_overwrite_yroot.sh bing_simulator_build 4.5-20070411
 git clean -df
-yroot columbo_test --cmd &quot;yinst install yahoo_cfg_dev-2.8.14 perlbase perl58_compat&quot;
-yroot columbo_test --cmd &quot;cd $WORKSPACE/pkg &amp;&amp; make package&quot;</command>
+
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/home/y/lib/pkgconfig
+yroot columbo_test --cmd &quot;yinst install bing_simulator_build -br test --downgrade&quot;
+yroot columbo_test --cmd &quot;cd $WORKSPACE/bing_simulator_config/ &amp;&amp; ./bootstrap &amp;&amp; ./configure &amp;&amp; make &amp;&amp; make check &amp;&amp; make package&quot;
+yroot columbo_test --cmd &quot;cd $WORKSPACE/bing_simulator/ &amp;&amp; ./bootstrap &amp;&amp; ./configure &amp;&amp; make &amp;&amp; make package&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>pkg/yellowstone_columbo_perl-*.tgz</artifacts>
+      <artifacts>bing_simulator_config/bing_simulator_config-*.tgz, bing_simulator/bing_simulator-*.tgz</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
-    <hudson.tasks.test.AggregatedTestResultPublisher/>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>columbo_test</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
   </publishers>
   <buildWrappers/>
 </project>
