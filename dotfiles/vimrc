@@ -1,9 +1,11 @@
 " Chris Koenig, February 2006
 " ~/.vimrc
 
+" http://nvie.com/posts/how-i-boosted-my-vim/
+
 " Note: nmap is normal mode, imap is insert mode, vmap is visual mode
 
-" Use vim defaults instead of vi settings
+" Use vim defaults instead of vi settings. Should always be the first thing.
 set nocompatible
 
 " Keep the indenting of the last line

@@ -60,10 +60,10 @@
       <command>~/src/ckoenig/hudson/create_or_overwrite_yroot.sh bing_simulator_build 4.5-20070411
 git clean -df
 
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/home/y/lib/pkgconfig
-yroot columbo_test --cmd &quot;yinst install bing_simulator_build -br test --downgrade&quot;
-yroot columbo_test --cmd &quot;cd $WORKSPACE/bing_simulator_config/ &amp;&amp; ./bootstrap &amp;&amp; ./configure &amp;&amp; make &amp;&amp; make check &amp;&amp; make package&quot;
-yroot columbo_test --cmd &quot;cd $WORKSPACE/bing_simulator/ &amp;&amp; ./bootstrap &amp;&amp; ./configure &amp;&amp; make &amp;&amp; make package&quot;</command>
+PKG_CHANGE=&quot;export PKG_CONFIG_PATH=\$PKG_CONFIG_PATH:/home/y/lib/pkgconfig&quot;
+yroot bing_simulator_build --cmd &quot;yinst install bing_simulator_build -br test&quot;
+yroot bing_simulator_build --cmd &quot;$PKG_CHANGE &amp;&amp; cd $WORKSPACE/bing_simulator_config/ &amp;&amp; ./bootstrap &amp;&amp; ./configure &amp;&amp; make &amp;&amp; make check &amp;&amp; make package&quot;
+yroot bing_simulator_build --cmd &quot;$PKG_CHANGE &amp;&amp; cd $WORKSPACE/bing_simulator/ &amp;&amp; ./bootstrap &amp;&amp; ./configure &amp;&amp; make &amp;&amp; make package&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>

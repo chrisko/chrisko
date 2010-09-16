@@ -18,7 +18,9 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>yroot columbo_test --cmd &quot;yinst install perlbase perl58_compat&quot;
+      <command>#!/bin/zsh
+
+yroot columbo_test --cmd &quot;yinst install perlbase perl58_compat&quot;
 yroot columbo_test --cmd &quot;yinst install -br test ~/.hudson/jobs/columbo/lastStable/archive/pkg/yellowstone_columbo_perl-*.tgz&quot;
 yroot columbo_test --cmd &quot;~/src/ckoenig/hudson/columbo_syntax_check.sh&quot;
 

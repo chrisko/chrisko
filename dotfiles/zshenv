@@ -24,6 +24,8 @@ export PATH=/usr/local/bin:/home/y/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/
 [[ -e ~/src/tig ]] && export PATH=$PATH:~/src/tig
 [[ -e ~/src/node ]] && export PATH=$PATH:~/src/node
 [[ -e ~/src/R/bin ]] && export PATH=$PATH:~/src/R/bin
+# For the MacTex distribution on OSX:
+[[ -e /usr/texbin ]] && export PATH=$PATH:/usr/texbin
 
 [[ -e ~/.keychain/`hostname`-sh ]] && source ~/.keychain/`hostname`-sh
 
@@ -42,7 +44,7 @@ export GIT_EXEC_PATH=~/src/git/
 export GITPERLLIB=~/src/git/perl/blib/lib/
 export GITWEB_CONFIG=~/.gitweb
 
-export NLTK_CORPORA=~/src/nltk/nltk_data/packages/corpora
+export NLTK_DATA=~/src/nltk/nltk_data/packages/
 
 export EDITOR=vim
 export SVN_EDITOR=vim
