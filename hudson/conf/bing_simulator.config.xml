@@ -57,7 +57,9 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>~/src/ckoenig/hudson/create_or_overwrite_yroot.sh bing_simulator_build 4.5-20070411
+      <command>#!/bin/zsh -e
+
+~/src/ckoenig/hudson/create_or_overwrite_yroot.sh bing_simulator_build 4.5-20070411
 git clean -df
 
 PKG_CHANGE=&quot;export PKG_CONFIG_PATH=\$PKG_CONFIG_PATH:/home/y/lib/pkgconfig&quot;
