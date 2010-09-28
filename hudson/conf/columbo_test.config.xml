@@ -11,6 +11,7 @@
   <keepDependencies>false</keepDependencies>
   <properties/>
   <scm class="hudson.scm.NullSCM"/>
+  <quietPeriod>5</quietPeriod>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
@@ -27,20 +28,23 @@ yroot columbo_test --cmd &quot;~/src/ckoenig/hudson/columbo_syntax_check.sh&quot
 GATEWAYS=(af1183.yss.ac4.yahoo.com ysadm1000.yss.ac2.yahoo.com ysadm1001.yss.sk1.yahoo.com)
 for HOST in $GATEWAYS; do
     scp ~/.hudson/jobs/columbo/lastStable/archive/pkg/yellowstone_columbo_perl-*.tgz $HOST:/tmp/latest_columbo_package.tgz
-    ssh $HOST &quot;sudo /usr/local/bin/yinst install perlbase perl58_compat&quot;
-    ssh $HOST &quot;sudo /usr/local/bin/yinst install -br test /tmp/latest_columbo_package.tgz&quot;
+# TEMPORARY: until they restore my NOPASSWD sudo access on af1183, at least.
+#    ssh $HOST &quot;sudo /usr/local/bin/yinst install perlbase perl58_compat&quot;
+#    ssh $HOST &quot;sudo /usr/local/bin/yinst install -br test /tmp/latest_columbo_package.tgz&quot;
 done
 
 echo &quot;Running test scripts in t/ directory...&quot;
 TEST_FILES=`ls /home/ckoenig/.hudson/jobs/columbo/workspace/src/perl/t/*.pl`
-for TEST in ${=TEST_FILES}; do
-    yroot columbo_test --cmd &quot;/usr/local/bin/perl $TEST&quot;
+for SCRIPT in ${=TEST_FILES}; do
+    yroot columbo_test --cmd &quot;/usr/local/bin/perl $SCRIPT&quot;
 done
 
 # Now that it&apos;s working elsewhere, install it as a link package, outside of the yroot:
-yroot columbo_test --cmd &quot;yinst --create --buildtype=link ~/src/columbo/pkg/yellowstone_columbo_perl.yicf&quot;
-yinst install ./yellowstone_columbo_perl-*.L*.tgz
+rm /home/ckoenig/.hudson/jobs/columbo/workspace/pkg/*.tgz &amp;&gt; /dev/null
+yroot columbo_test --cmd &quot;cd /home/ckoenig/.hudson/jobs/columbo/workspace/pkg &amp;&amp; yinst_create --clean --buildtype=link ./yellowstone_columbo_perl.yicf&quot;
+yinst install -br test /home/ckoenig/.hudson/jobs/columbo/workspace/pkg/yellowstone_columbo_perl-*.L*.tgz
 
+# Remember to clean up the yroot on success:
 ~/src/ckoenig/hudson/remove_yroot.sh columbo_test</command>
     </hudson.tasks.Shell>
   </builders>
