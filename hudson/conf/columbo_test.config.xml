@@ -39,10 +39,13 @@ for SCRIPT in ${=TEST_FILES}; do
     yroot columbo_test --cmd &quot;/usr/local/bin/perl $SCRIPT&quot;
 done
 
-# Now that it&apos;s working elsewhere, install it as a link package, outside of the yroot:
+# Now that it&apos;s working elsewhere, install it as a link package, outside of the yroot.
+# I don&apos;t want it to link to the workspace, NB. I want it linking to my home directory.
 rm /home/ckoenig/.hudson/jobs/columbo/workspace/pkg/*.tgz &amp;&gt; /dev/null
-yroot columbo_test --cmd &quot;cd /home/ckoenig/.hudson/jobs/columbo/workspace/pkg &amp;&amp; yinst_create --clean --buildtype=link ./yellowstone_columbo_perl.yicf&quot;
-yinst install -br test /home/ckoenig/.hudson/jobs/columbo/workspace/pkg/yellowstone_columbo_perl-*.L*.tgz
+yroot columbo_test --cmd &quot;cd /home/ckoenig/src/columbo/pkg &amp;&amp; yinst_create --clean --buildtype=link ./yellowstone_columbo_perl.yicf&quot;
+JUST_BUILT_PKG=`ls -t /home/ckoenig/src/columbo/pkg/yellowstone_columbo_perl-*.L*.tgz | head -1`
+yinst install -br test $JUST_BUILT_PKG
+rm $JUST_BUILT_PKG
 
 # Remember to clean up the yroot on success:
 ~/src/ckoenig/hudson/remove_yroot.sh columbo_test</command>
