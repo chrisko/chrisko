@@ -46,6 +46,7 @@
     <excludedRegions></excludedRegions>
     <excludedUsers></excludedUsers>
   </scm>
+  <quietPeriod>3</quietPeriod>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
@@ -57,26 +58,51 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>~/src/ckoenig/hudson/create_or_overwrite_yroot.sh columbo_test 4.5-20070411
+      <command>#!/bin/zsh -e
+
+~/src/ckoenig/hudson/create_or_overwrite_yroot.sh columbo_test 4.5-20070411
 git clean -df
 yroot columbo_test --cmd &quot;yinst install yahoo_cfg_dev-2.8.14 perlbase perl58_compat&quot;
-yroot columbo_test --cmd &quot;cd $WORKSPACE/pkg &amp;&amp; make package&quot;</command>
+yroot columbo_test --cmd &quot;cd $WORKSPACE/pkg &amp;&amp; make yellowstone_columbo_perl.yicf/package&quot;
+
+yroot columbo_test --cmd &quot;yinst install perlbase perl58_compat&quot;
+yroot columbo_test --cmd &quot;yinst install -br test $WORKSPACE/pkg/yellowstone_columbo_perl-*.tgz&quot;
+yroot columbo_test --cmd &quot;~/src/ckoenig/hudson/columbo_syntax_check.sh&quot;
+
+GATEWAYS=(af1183.yss.ac4.yahoo.com ysadm1000.yss.ac2.yahoo.com ysadm1001.yss.sk1.yahoo.com)
+for HOST in $GATEWAYS; do
+    scp ~/.hudson/jobs/columbo/lastStable/archive/pkg/yellowstone_columbo_perl-*.tgz $HOST:/tmp/latest_columbo_package.tgz
+# TEMPORARY: until they restore my NOPASSWD sudo access on af1183, at least.
+#    ssh $HOST &quot;sudo /usr/local/bin/yinst install perlbase perl58_compat&quot;
+#    ssh $HOST &quot;sudo /usr/local/bin/yinst install -br test /tmp/latest_columbo_package.tgz&quot;
+done
+
+echo &quot;Running test scripts in t/ directory...&quot;
+TEST_FILES=`ls /home/ckoenig/.hudson/jobs/columbo/workspace/src/perl/t/*.pl`
+for SCRIPT in ${=TEST_FILES}; do
+    yroot columbo_test --cmd &quot;/usr/local/bin/perl $SCRIPT&quot;
+done
+
+# Now that it&apos;s working elsewhere, install it as a link package, outside of the yroot.
+# I don&apos;t want it to link to the workspace, NB. I want it linking to my home directory.
+yroot columbo_test --cmd &quot;cd /home/ckoenig/src/columbo/pkg &amp;&amp; yinst_create --clean --buildtype=link ./yellowstone_columbo_perl.yicf&quot;
+JUST_BUILT_PKG=`ls -t /home/ckoenig/src/columbo/pkg/yellowstone_columbo_perl-*.L*.tgz | head -1`
+yinst install -br test $JUST_BUILT_PKG
+rm $JUST_BUILT_PKG
+
+# Remember to clean up the yroot on success:
+~/src/ckoenig/hudson/remove_yroot.sh columbo_test</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
+    <hudson.tasks.Fingerprinter>
+      <targets></targets>
+      <recordBuildArtifacts>true</recordBuildArtifacts>
+    </hudson.tasks.Fingerprinter>
     <hudson.tasks.ArtifactArchiver>
       <artifacts>pkg/yellowstone_columbo_perl-*.tgz</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
-    <hudson.tasks.test.AggregatedTestResultPublisher/>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>columbo_test</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
   </publishers>
   <buildWrappers/>
 </project>
