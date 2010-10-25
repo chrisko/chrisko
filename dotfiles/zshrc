@@ -1,7 +1,24 @@
 # .zshrc contains settings for interactive shells only.
 
-# Command prompt
-export PROMPT=$'%U%n@%m:%u%{\e[0;31m%}'${YROOT_NAME}$'%{\e[0m%}[%B%h%b]:%B%~%b%% '
+# http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
+function prompt_char {
+    git branch &> /dev/null
+    if [[ $? -eq 0 ]]; then
+        echo -n '±'
+    else
+        echo -n '○'
+    fi
+}
+
+## Command Prompt ##############################################################
+# This turns on command substitution in the prompt, so it'll be reevaluated.
+setopt PROMPT_SUBST
+# %U starts underline mode, and the later %u stops it.
+# %n outputs $USERNAME, then @, then %m is the hostname up to the first '.'.
+# %B and %b start and stop boldface mode.
+# %h is the shell history event number.
+# %~ is the PWD, with a bit of string interpolation to manage $HOME.
+export PROMPT='%U%n@%m%u[%B%h%b]%B%~%b$(prompt_char) '
 
 # vi editing
 bindkey -v
@@ -10,7 +27,6 @@ bindkey -v
 set nobeep
 
 # Set up aliases
-alias fineliberty='ssh -q fineliberty'
 alias vimo='vim -O'
 alias ifind='find . -iname'
 alias cd..="cd .."
@@ -29,4 +45,4 @@ if [[ -e $HOME/.ssh/known_hosts ]]; then
     zstyle ':completion:*' hosts make $hosts
 fi
 
-REPORTTIME=10  # Print elapsed time if greater than 10s
+REPORTTIME=60  # Tell zsh to print the elapsed time, if greater than 60s.

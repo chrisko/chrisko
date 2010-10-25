@@ -1,3 +1,5 @@
-our $GIT = "/home/ckoenig/src/git/git";
-our $projectroot = "/home/ckoenig/src";
+# The system-wide location is "/etc/gitweb.conf", can can be
+# overridden through GITWEB_CONFIG_SYSTEM environment variable.
+our $GIT = "/Users/ckoenig/src/git/git";
+our $projectroot = "/Users/ckoenig/src";
 our $site_name = "ckoenig git projects";
