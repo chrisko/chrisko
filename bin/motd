@@ -1,0 +1,35 @@
+#!/usr/bin/perl
+my @quotes = split("\n#+\n", join('', <DATA>));
+my @lines = split("\n", $quotes[rand @quotes]);
+print "\033[1;34m"  # Darkish blue, unobtrusive.
+    . join("\n", map { /^\s*--\s*(.+)\s*$/
+                           ? (" " x (80 - length($1)) . "$1")
+                           : (" " x (40 - length($_) / 2)) . "$_" } @lines)
+    . "\n\033[0m";
+__DATA__
+There are some mornings where the sky looks like a road.
+There are some dragons who are built to have and hold.
+And some machines are dropped from great heights, lovingly!
+And some great bellies ache with many bumblebees,
+And they sting so terribly.
+  -- Clam, Crab, Cockle, Cowrie
+  -- Joanna Newsom
+###
+And I've been making promises I know I'll never keep.
+One of these days I'm gonna leave you in your sleep.
+I've got to go when the whistle blows, the whistle knows my name.
+Baby, I was born on a train.
+  -- Born on a Train
+  -- The Magnetic Fields
+###
+When I die
+Put my bones in an empty street
+To remind me how it used to be.
+Don't write my name on stone;
+Bring a Coleman lantern and the radio,
+Cleveland game and two fishin' poles,
+And watch with me from the shore
+Ghostly steel and iron ore
+Ships coming home.
+  -- Blue Factory Flame
+  -- Songs: Ohia

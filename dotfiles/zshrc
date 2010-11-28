@@ -46,3 +46,6 @@ if [[ -e $HOME/.ssh/known_hosts ]]; then
 fi
 
 REPORTTIME=60  # Tell zsh to print the elapsed time, if greater than 60s.
+
+# Print out a quote, if the script is there, and executable:
+[[ -x ~/src/ckoenig/bin/motd ]] && ~/src/ckoenig/bin/motd
