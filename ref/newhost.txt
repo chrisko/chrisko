@@ -1,9 +1,6 @@
 ## git #########################################################################
 #   http://kernel.org/pub/software/scm/git/
 
-## Dotfiles ####################################################################
-svn co http://svn.corp.yahoo.com/view/yahoo/users/ckoenig/ ./ckoenig
-
 ## SSH #########################################################################
 # Create new SSH keys:
 ssh-keygen -t rsa
