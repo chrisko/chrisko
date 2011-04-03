@@ -1,0 +1,26 @@
+Make sure the CGI module is installed.
+The "Failed Request Tracing" is useful, too. Logs go into "c:\inetpub\logs\FailedReqLogFiles\".
+
+In the IIS Manager (I'm using Server Manager), add a new Site named "git".
+No need to create a new Application Pool, we'll use DefaultAppPool.
+In that Site's setting:
+  - Change the "Bindings" to port 8080 (or whatever).
+  - The "Basic Settings" should link to "c:\Users\ckoenig\Documents\src\git\gitweb".
+  - That "Connect as" under "Basic Settings" should be using pass-through authentication.
+
+In "Authentication", turn on "Windows Authentication", using HTTP 401 Challenge.
+Change the "Default Document" to "gitweb.cgi". Move it to the top, or delete the others.
+Under "Handler Mappings", hit "Add Wildcard Script Map" on the right.
+  Matching "*", choosing the executable "c:\cygwin\bin\perl.exe gitweb.cgi %s".
+  Hit that "Request Restrictions" box, too, and under "Access" check "Execute".
+
+Permissions:
+  If there's a "web.config" file, make sure the permissions are world-readable.
+  Make sure gitweb is 755, and gitweb/static is 755 (with contents 644).
+
+(If the "Handler Mappings" are all disabled, then... Panic?)
+
+Now you should be able to hit the server, and get back HTTP 502's.
+The problem is, gitweb's not returning anything. Empty headers are an error.
+
+Enter the gitweb directory, and run "perl gitweb.cgi" to see what errors there are.
