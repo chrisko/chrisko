@@ -3,22 +3,3 @@ Protocol 2
 Host languishes
     HostName languishes.net
     LocalForward localhost:5901 localhost:5900
-
-Host fineliberty
-    HostName pathwith.greatamerica.corp.yahoo.com
-    RemoteForward 56230 localhost:22
-
-Host corp
-    Hostname proxy.corp.yahoo.com
-    CompressionLevel 9
-    ForwardAgent yes
-
-Host mblue
-    # http://twiki.corp.yahoo.com/view/GridDocumentation/MithrilBlueClusterInfo
-    Hostname mithril-gw.blue.ygrid.yahoo.com
-Host mgold
-    # http://twiki.corp.yahoo.com/view/GridDocumentation/MithrilGoldClusterInfo
-    Hostname mithril-gw.gold.ygrid.yahoo.com
-Host digold
-    # http://twiki.corp.yahoo.com/view/Grid/DilithiumGoldClusterConfigs
-    Hostname dilithium-gw.gold.ygrid.yahoo.com
