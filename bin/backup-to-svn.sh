@@ -1,10 +1,10 @@
 #!/bin/sh
 
-if [[ -e ~/.hudson/jobs && -e ~/src/ckoenig/hudson/conf ]]; then
-    for HUDSON_JOB in `ls ~/.hudson/jobs`; do
-        CONFIG_FILE=~/.hudson/jobs/$HUDSON_JOB/config.xml
+if [[ -e ~/.jenkins/jobs && -e ~/src/ckoenig/jenkins/conf ]]; then
+    for JENKINS_JOB in `ls ~/.jenkins/jobs`; do
+        CONFIG_FILE=~/.jenkins/jobs/$JENKINS_JOB/config.xml
         if [[ -e $CONFIG_FILE ]]; then
-            cp $CONFIG_FILE ~/src/ckoenig/hudson/conf/$HUDSON_JOB.config.xml
+            cp $CONFIG_FILE ~/src/ckoenig/jenkins/conf/$JENKINS_JOB.config.xml
             [[ $? != 0 ]] && exit 1
         fi
     done
