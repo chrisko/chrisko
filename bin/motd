@@ -7,30 +7,30 @@ print "\033[1;34m"  # Darkish blue, unobtrusive.
                            : (" " x (40 - length($_) / 2)) . "$_" } @lines)
     . "\n\033[0m";
 __DATA__
-There are some mornings where the sky looks like a road.
-There are some dragons who are built to have and hold.
-And some machines are dropped from great heights, lovingly!
-And some great bellies ache with many bumblebees,
-And they sting so terribly.
+There are some mornings where the sky looks like a road
+There are some dragons who are built to have and hold
+And some machines are dropped from great heights, lovingly
+And some great bellies ache with many bumblebees
+And they sting so terribly
   -- Clam, Crab, Cockle, Cowrie
   -- Joanna Newsom
 ###
-And I've been making promises I know I'll never keep.
-One of these days I'm gonna leave you in your sleep.
-I've got to go when the whistle blows, the whistle knows my name.
-Baby, I was born on a train.
+And I've been making promises I know I'll never keep
+One of these days I'm gonna leave you in your sleep
+I've got to go when the whistle blows, the whistle knows my name
+Baby, I was born on a train
   -- Born on a Train
   -- The Magnetic Fields
 ###
 When I die
 Put my bones in an empty street
-To remind me how it used to be.
-Don't write my name on stone;
-Bring a Coleman lantern and the radio,
-Cleveland game and two fishin' poles,
+To remind me how it used to be
+Don't write my name on stone
+Bring a Coleman lantern and the radio
+Cleveland game and two fishin' poles
 And watch with me from the shore
 Ghostly steel and iron ore
-Ships coming home.
+Ships coming home
   -- Blue Factory Flame
   -- Songs: Ohia
 ###
@@ -51,22 +51,22 @@ follows my pen. The days and hours of it are flying over our heads like clouds
 of a windy day never to return — more every thing presses on — and every time I
 kiss thy hand to bid adieu, every absence which follows it, are preludes to the
 eternal separation which we are shortly to make!
-  -- Tristram Shandy
+  -- Tristram Shandy (1759 - 1767)
   -- Laurence Sterne
 ###
 Most of life is so dull it is not worth discussing, and it is dull at all ages.
 When we change our brand of cigarette, move to a new neighborhood, subscribe to
 a different newspaper, fall in and out of love, we are protesting in ways both
 frivolous and deep against the not to be diluted dullness of day-to-day living.
-  -- Summer Crossing
-  -— Truman Capote
+  -- Summer Crossing (1949)
+  -- Truman Capote
 ###
 If you reveal everything, bare every feeling, ask for understanding,
 you lose something crucial to your sense of yourself.
 You need to know things that others don’t know.
 It’s what no one knows about you that allows you to know yourself.
-  -- Point Omega
-  -— Don DeLillo
+  -- Point Omega (2010)
+  -- Don DeLillo
 ###
 The bastard form of mass culture is humiliated repetition... Always new books,
 new programs, new films, new items, but always the same meaning.
@@ -76,3 +76,30 @@ new programs, new films, new items, but always the same meaning.
 Woe to the statesman whose arguments for entering a war
 are not as convincing at its end as they were at the beginning.
   -- Otto von Bismarck
+###
+Unhappiness is selfish, grief is selfish. For whom are the tears?
+  -- Written on the Body (1992)
+  -- Jeanette Winterson
+###
+Silicon Valley was a physical place, it extended from
+Santa Clara, Sunnyvale, Mountain View. Now it's a state of mind
+that essentially extends from San Jose to San Francisco.
+  -- Steve Blank (2011)
+###
+Watch your thoughts, for they become words.
+Watch your words, for they become actions.
+Watch your actions, for they become habits.
+Watch your habits, for they become your character.
+Watch your character, for it becomes your destiny.
+  -- Poster on some 7th grade classroom wall
+###
+Does one's integrity ever lie in what he is not able to do?
+I think that usually it does, for free will does not mean one will,
+but many wills conflicting in one man.
+  -- Wise Blood (1952)
+  -- Flannery O'Connor
+###
+Books are the carriers of civilization. Without books, history
+is silent, literature dumb, science crippled, thought
+and speculation at a standstill.
+  -- Henry David Thoreau
