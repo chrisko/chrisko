@@ -14,6 +14,10 @@ Under "Handler Mappings", hit "Add Wildcard Script Map" on the right.
   Matching "*", choosing the executable "c:\cygwin\bin\perl.exe gitweb.cgi %s".
   Hit that "Request Restrictions" box, too, and under "Access" check "Execute".
 
+If the Handler Mapping is greyed out, you may need to enable that "Execute" at a wider level.
+  In your "git" site, go to Configuration Editor. Look up "system.webServer/handlers".
+  The "accessPolicy" key should have "Read, Write, Execute" for the script to be able to run.
+
 Permissions:
   If there's a "web.config" file, make sure the permissions are world-readable.
   Make sure gitweb is 755, and gitweb/static is 755 (with contents 644).

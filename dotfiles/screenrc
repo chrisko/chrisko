@@ -1,5 +1,6 @@
-# This is an example for the global screenrc file.
+shell zsh
 
+# Turn login mode on. Updates /etc/utmp, for the benefit of shutdown, talk, etc.
 deflogin on
 
 # ^G would trigger a bell, visual in this case.

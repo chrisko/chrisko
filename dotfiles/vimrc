@@ -13,6 +13,14 @@ set autoindent
 " Increase indent when last line ends with {
 set smartindent
 
+if has("win32")
+    " These will hopefully help my EOF-newline woes at work...
+    set fileformats=dos,unix,mac
+    set filetype=dos
+    " And fix the fonT
+    set guifont=Consolas:h10
+endif
+
 " Show the cursor position at all times
 set ruler
 
@@ -27,6 +35,8 @@ endif
 if has("syntax")
     syntax on
 endif
+
+colorscheme desert
 
 " Insert spaces when tab key is pressed
 set expandtab

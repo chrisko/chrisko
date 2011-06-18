@@ -2,14 +2,14 @@
 
 # http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
 function prompt_char {
-    if [[ `uname` = "Darwin" ]]; then
-        git branch &> /dev/null
-        if [[ $? -eq 0 ]]; then
-            echo -n '±'
-        else
-            echo -n '○'
-        fi
-    fi
+#    if [[ `uname` = "Darwin" ]]; then
+#        git branch &> /dev/null
+#        if [[ $? -eq 0 ]]; then
+#            echo -ne "\u00b1"
+#        else
+#            echo -ne "\u25cb"
+#        fi
+#    fi
 }
 
 ## Command Prompt ##############################################################
@@ -47,7 +47,11 @@ if [[ -e $HOME/.ssh/known_hosts ]]; then
     zstyle ':completion:*' hosts make $hosts
 fi
 
-REPORTTIME=60  # Tell zsh to print the elapsed time, if greater than 60s.
+# Tell zsh to print the elapsed time, if greater than 60s.
+REPORTTIME=60
 
-# Print out a quote, if the script is there, and executable:
+# Print out a quote, if the script exists and is executable:
 [[ -x ~/src/ckoenig/bin/motd ]] && ~/src/ckoenig/bin/motd
+
+# Cygwin always seems to start me in the wrong directory, thus:
+[[ `uname` != "Darwin" ]] && cd ~ckoenig
