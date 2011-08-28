@@ -1,14 +1,14 @@
 [user]
-	name = Chris Koenig
-	email = chrisjameskoenig@gmail.com
+    name = Chris Koenig
+    email = chrisjameskoenig@gmail.com
 
 [core]
     excludesFile = "~/.gitignore"
 
 [color]
-	branch = auto
-	diff = auto
-	status = auto
+    branch = auto
+    diff = auto
+    status = auto
 
 [github]
-	user = chrisko
+    user = chrisko
