@@ -1,20 +1,19 @@
-# .zshrc contains settings for interactive shells only.
-
-# http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
-function prompt_char {
-#    if [[ `uname` = "Darwin" ]]; then
-#        git branch &> /dev/null
-#        if [[ $? -eq 0 ]]; then
-#            echo -ne "\u00b1"
-#        else
-#            echo -ne "\u25cb"
-#        fi
-#    fi
-}
+# .zshrc contains settings for interactive shells. It's read after the .zshenv.
 
 ## Command Prompt ##############################################################
 # This turns on command substitution in the prompt, so it'll be reevaluated.
 setopt PROMPT_SUBST
+
+# http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt
+function prompt_char {
+    git branch &> /dev/null
+    if [[ $? -eq 0 ]]; then
+        echo -ne "\u00b1"
+    else
+        echo -ne "\u25cb"
+    fi
+}
+
 # %U starts underline mode, and the later %u stops it.
 # %n outputs $USERNAME, then @, then %m is the hostname up to the first '.'.
 # %B and %b start and stop boldface mode.
@@ -29,15 +28,9 @@ bindkey -v
 set nobeep
 
 # Set up aliases
-alias vimo='vim -O'
-alias ifind='find . -iname'
+alias vimo="vim -O"
+alias ifind="find . -iname"
 alias cd..="cd .."
-
-# Start keychain to store passphrases:
-KEYCHAIN_SOURCE=~/.keychain/`hostname`-sh
-[[ -e $KEYCHAIN_SOURCE ]] && source $KEYCHAIN_SOURCE
-[[ -e /usr/bin/keychain ]] && /usr/bin/keychain -q -Q --nogui ~/.ssh/id_rsa ~/.ssh/id_dsa
-[[ -e $KEYCHAIN_SOURCE ]] && source $KEYCHAIN_SOURCE
 
 # zsh completion
 autoload -U compinit; compinit;
@@ -47,11 +40,8 @@ if [[ -e $HOME/.ssh/known_hosts ]]; then
     zstyle ':completion:*' hosts make $hosts
 fi
 
-# Tell zsh to print the elapsed time, if greater than 60s.
+# Tell zsh to print the last command's elapsed time, if greater than 60s.
 REPORTTIME=60
 
 # Print out a quote, if the script exists and is executable:
 [[ -x ~/src/ckoenig/bin/motd ]] && ~/src/ckoenig/bin/motd
-
-# Cygwin always seems to start me in the wrong directory, thus:
-[[ `uname` != "Darwin" ]] && cd ~ckoenig
