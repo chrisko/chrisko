@@ -6,6 +6,7 @@ print "\033[1;34m"  # Darkish blue, unobtrusive.
                            ? (" " x (80 - length($1)) . "$1")
                            : (" " x (40 - length($_) / 2)) . "$_" } @lines)
     . "\n\033[0m";
+
 __DATA__
 There are some mornings where the sky looks like a road
 There are some dragons who are built to have and hold
@@ -63,8 +64,8 @@ frivolous and deep against the not to be diluted dullness of day-to-day living.
 ###
 If you reveal everything, bare every feeling, ask for understanding,
 you lose something crucial to your sense of yourself.
-You need to know things that others don’t know.
-It’s what no one knows about you that allows you to know yourself.
+You need to know things that others don't know.
+It's what no one knows about you that allows you to know yourself.
   -- Point Omega (2010)
   -- Don DeLillo
 ###
@@ -117,10 +118,10 @@ and provide a beautiful context for life's drama.
 Cinema is higher than us, it is that to which we must lift our eyes.
   -- Jean-Luc Godard
 ###
-Love is not so much a matter of romance as it is a matter of anxious concern
-for the wellbeing of one’s companion.
+Love is not so much a matter of romance as it is a matter
+of anxious concern for the wellbeing of one's companion.
   -- Jane Eyre (1847)
-  -— Charlotte Brontë
+  -- Charlotte Brontë
 ###
 German language, you are your masterpiece:
 love interwound in all your compound voices
@@ -132,3 +133,8 @@ of weary years, I feel you have become
 as out of reach as algebra and the moon.
   -- From "To the German Language"
   -- Jorge Luis Borges
+###
+Think of me what you will
+I've got a little space to fill
+  -- From "You Don't Know How It Feels"
+  -- Tom Petty
