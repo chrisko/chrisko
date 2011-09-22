@@ -2,4 +2,4 @@ Protocol 2
 
 Host languishes
     HostName languishes.net
-    LocalForward localhost:5901 localhost:5900
+    LocalForward 5901 localhost:5900
