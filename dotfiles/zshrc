@@ -6,11 +6,13 @@ setopt PROMPT_SUBST
 
 # http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt
 function prompt_char {
-    git branch &> /dev/null
-    if [[ $? -eq 0 ]]; then
-        echo -ne "\u00b1"
-    else
-        echo -ne "\u25cb"
+    if [[ `uname` = "Darwin" ]]; then
+        git branch &> /dev/null
+        if [[ $? -eq 0 ]]; then
+            echo -ne "\u00b1"
+        else
+            echo -ne "\u25cb"
+        fi
     fi
 }
 

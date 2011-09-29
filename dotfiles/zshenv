@@ -30,7 +30,9 @@ POSTPATHDIRS=($HOME/src/ckoenig/bin /usr/texbin /usr/local/Cellar/ruby/1.9.2-p29
 for DIR in $POSTPATHDIRS; do [[ -e $DIR ]] && export PATH=$PATH:$DIR; done
 
 # Look for launchd's SSH authentication socket on OS X:
-export SSH_AUTH_SOCK=$(ls /tmp/launch-*/Listeners)
+if [[ `uname` = "Darwin" ]]; then
+    export SSH_AUTH_SOCK=$(ls /tmp/launch-*/Listeners)
+fi
 
 # Set up PYTHONPATH. Some directories are specific to homebrew
 # installations, and some are for use on eniac, for CIS-530.
