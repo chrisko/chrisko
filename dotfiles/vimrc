@@ -10,8 +10,6 @@ set nocompatible
 
 " Keep the indenting of the last line
 set autoindent
-" Increase indent when last line ends with {
-set smartindent
 
 " Save and load fold settings automatically. From http://dotfiles.org/~tsukkee/.vimrc
 " Don't save options.
