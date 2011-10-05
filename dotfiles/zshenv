@@ -36,11 +36,14 @@ fi
 
 # Set up PYTHONPATH. Some directories are specific to homebrew
 # installations, and some are for use on eniac, for CIS-530.
-pypaths=(/usr/local/Cellar/python/2.7.2/lib/python2.7/site-packages \
-         /home1/c/cis530/Software/python2.6/site-packages \
-         $HOME/src/nltk/nltk)
-for PYPATH in $pypaths; do
-    [[ -d $PYPATH ]] && PYTHONPATH=$PYTHONPATH:$PYPATH
+PYTHONDIRS=(
+    /usr/local/Cellar/python/2.7.2/lib/python2.7/site-packages
+    /home1/c/cis530/Software/python2.6/site-packages
+    $HOME/src/nltk/nltk
+)
+
+for PYTHONDIR in $PYTHONDIRS; do
+    [[ -d $PYTHONDIR ]] && export PYTHONPATH=${PYTHONPATH:+$PYTHONPATH:}$PYTHONDIR
 done
 
 # Set Node to use modules in the homebrew install location:

@@ -3,3 +3,7 @@ Protocol 2
 Host languishes
     HostName languishes.net
     LocalForward 5901 localhost:5900
+
+Host eniac
+    HostName eniac.seas.upenn.edu
+    ForwardX11 yes
