@@ -1,49 +1,33 @@
-# .zshrc contains settings for interactive shells. It's read after the .zshenv.
+## oh-my-zsh ###################################################################
+# Path to your oh-my-zsh configuration.
+ZSH=$HOME/.oh-my-zsh
 
-## Command Prompt ##############################################################
-# This turns on command substitution in the prompt, so it'll be reevaluated.
-setopt PROMPT_SUBST
+# Name of the oh-my-zsh theme to load. Robby Russell's the guy behind oh-my-zsh,
+# and his theme's got some nice git symbols and pretty colors.
+ZSH_THEME="robbyrussell"
 
-# http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt
-function prompt_char {
-    if [[ `uname` = "Darwin" ]]; then
-        git branch &> /dev/null
-        if [[ $? -eq 0 ]]; then
-            echo -ne "\u00b1"
-        else
-            echo -ne "\u25cb"
-        fi
-    fi
-}
+# Tell oh-my-zsh to use case-sensitive completion.
+CASE_SENSITIVE="true"
 
-# %U starts underline mode, and the later %u stops it.
-# %n outputs $USERNAME, then @, then %m is the hostname up to the first '.'.
-# %B and %b start and stop boldface mode.
-# %h is the shell history event number.
-# %~ is the PWD, with a bit of string interpolation to manage $HOME.
-export PROMPT='%U%n@%m%u[%B%h%b]%B%~%b$(prompt_char) '
+# Load these oh-my-zsh plugins:
+plugins=(brew git osx)
 
-# vi editing
+source $ZSH/oh-my-zsh.sh
+
+## personal ####################################################################
+# Enable vi editing
 bindkey -v
 
 # No beeping
 set nobeep
 
-# Set up aliases
+# Set up a couple aliases
 alias vimo="vim -O"
 alias ifind="find . -iname"
 alias cd..="cd .."
 
-# zsh completion
-autoload -U compinit; compinit;
-# For ssh hosts:
-if [[ -e $HOME/.ssh/known_hosts ]]; then
-    hosts=(${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*})
-    zstyle ':completion:*' hosts make $hosts
-fi
-
 # Tell zsh to print the last command's elapsed time, if greater than 60s.
 REPORTTIME=60
 
-# Print out a quote, if the script exists and is executable:
+# Print out a quote, if the script exists and is executable.
 [[ -x ~/src/ckoenig/bin/motd ]] && ~/src/ckoenig/bin/motd
