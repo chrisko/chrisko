@@ -39,6 +39,8 @@ endif
 if has("syntax")
     syntax on
 endif
+" And syntax highlight from the start of the file; no messy half-highlighting.
+autocmd BufEnter * :syntax sync fromstart
 
 colorscheme desert
 
