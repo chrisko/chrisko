@@ -11,10 +11,23 @@ CASE_SENSITIVE="true"
 
 # Load these oh-my-zsh plugins:
 plugins=(brew git osx)
-
+# And finally, load oh-my-zsh:
 source $ZSH/oh-my-zsh.sh
 
 ## personal ####################################################################
+# Do a *slight* bit of fixing to the "robbyrussell" prompt... I like seeing the
+# username and hostname, plus the full path. Use the actual, for-real hostname,
+# too, which is usually overridden by OSX when I'm on DHCP networks.
+ACTUALHOST='%m'
+[[ `ifconfig | grep 'c8:bc:c8:9f:a1:d3' | wc -l` -eq 1 ]] && ACTUALHOST='book'
+[[ `ifconfig | grep '34:15:9e:2e:96:8e' | wc -l` -eq 1 ]] && ACTUALHOST='mini'
+PROMPT='%{$fg[magenta]%}%n%{$reset_color%}'  # Username.
+PROMPT=$PROMPT'@%{$fg[yellow]%}$ACTUALHOST'  # Actual hostname.
+PROMPT=$PROMPT'%{$fg_bold[red]%}➜'  # Red arrow.
+PROMPT=$PROMPT' %{$fg[cyan]%}${PWD/#$HOME/~}'  # PWD, substituting ~ nicely.
+PROMPT=$PROMPT' %{$fg_bold[blue]%}$(git_prompt_info)'  # Git prompt details.
+PROMPT=$PROMPT'%{$reset_color%} '  # And reset the color, finally.
+
 # Enable vi editing
 bindkey -v
 
