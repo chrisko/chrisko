@@ -1,15 +1,39 @@
 " Chris Koenig, February 2006
 " ~/.vimrc
 
-" http://nvie.com/posts/how-i-boosted-my-vim/
+" Some excellent references:
+"   http://nvie.com/posts/how-i-boosted-my-vim
+"   http://stevelosh.com/blog/2010/09/coming-home-to-vim
 
 " Note: nmap is normal mode, imap is insert mode, vmap is visual mode
 
-" Use vim defaults instead of vi settings. Should always be the first thing.
+filetype off
+if isdirectory("~/.vim/bundles")
+  call pathogen#runtime_append_all_bundles()
+endif
+
+filetype plugin indent on
+" Use vim defaults instead of silly backwards-compatible vi settings.
 set nocompatible
+
+" There are apparently some security exploits to do with modelines. No biggie.
+set modelines=0
 
 " Keep the indenting of the last line
 set autoindent
+
+" Keep three lines above or below the cursor when scrolling near the edge.
+set scrolloff=3
+
+" Flash the screen on a bell:
+set visualbell
+
+" Store the undo history to a file, and restore it for later. No lost changes.
+set undofile
+
+" Use normal regex formatting! Inserts a \v to turn of vim's silliness.
+nnoremap / /\v
+vnoremap / /\v
 
 " Save and load fold settings automatically. From http://dotfiles.org/~tsukkee/.vimrc
 " Don't save options.
@@ -35,6 +59,15 @@ if has("statusline")
     set statusline=%<%f\ %h%m%r%=%k[%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %-12.(%l,%c%V%)\ %P 
 endif
 
+" Assume a fast terminal collection, which sends more characters but smooths
+" out animations like scrolling, and copy-pasting from outside.
+set ttyfast
+
+" Always show the mode, the partial command, and the cursor position:
+set showmode
+set showcmd
+set ruler
+
 " Set syntax highlighting
 if has("syntax")
     syntax on
@@ -42,13 +75,16 @@ endif
 " And syntax highlight from the start of the file; no messy half-highlighting.
 autocmd BufEnter * :syntax sync fromstart
 
+" Highlight VCS conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
 colorscheme desert
 
 " Insert spaces when tab key is pressed
 set expandtab
-
 " Insert this many spaces for a tab
 set tabstop=4
+set softtabstop=4
 " Insert this many spaces for an indentation
 set shiftwidth=4
 
@@ -63,7 +99,8 @@ let loaded_matchparen = 1
 set hlsearch
 
 " Bash-style filename completion
-set wildmode=longest,list
+set wildmenu
+set wildmode=list:longest
 " Ignoring these file suffixes:
 set wildignore=*~,#*#,*.o,*.class
 
@@ -92,17 +129,29 @@ set autoread
 " Set cursor movement keys to wrap between lines
 set whichwrap+=<,>,h,l,~,[,]
 
-" Store backups, in specified directory, with specified extension
-set backupdir=/tmp
-set bex=.bak
-set backup
+" Store undo files, backup files, and swap files in my ~/.vim/tmp/ directory:
+if isdirectory("~/.vim/tmp")
+  set undodir=~/.vim/tmp/undo/     " undo files
+  set backupdir=~/.vim/tmp/backup/ " backups
+  set directory=~/.vim/tmp/swap/   " swap files
+  set backup                       " enable backups
+endif
 
 """" MAPPINGS """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" The leader always ought to be , instead of \. Much easier to get to.
+let mapleader = ","
 
 " I do this sometimes.
 command Q quit
 " Let W mean 'save as sudo':
 command W w !sudo tee % >/dev/null
+
+" Make it easier to hop around multiple windows, using control+<direction>.
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " Set F6 to highlight lines longer than 80 characters, and erroneous spaces:
 highlight BadSpacesAndLines ctermbg=green guibg=green
@@ -136,4 +185,5 @@ nmap <BS> <Esc><C-V><BS><Esc>
 
 map ,, <Esc><C-w><C-w>
 
-filetype plugin indent on
+" Quickly remove old searches, which are pretty distracting.
+nnoremap <leader><space> :noh<cr>
