@@ -55,3 +55,6 @@ if [[ -d /home1/c/cis530/data ]]; then
 else
     export NLTK_DATA=$HOME/src/nltk/nltk_data/packages
 fi
+
+# An attempt to speed up my oh-my-zsh startup time:
+skip_global_compinit=1
