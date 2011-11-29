@@ -1,3 +1,6 @@
+# Chris Koenig
+# ~/.zshenv
+
 # .zshenv sets up the environment for all shells, regardless of interactivity.
 # Nothing here had better output anything, or you'll see some weird behavior.
 
