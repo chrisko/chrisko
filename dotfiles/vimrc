@@ -8,7 +8,7 @@
 " Note: nmap is normal mode, imap is insert mode, vmap is visual mode
 
 filetype off
-if isdirectory("~/.vim/bundles")
+if isdirectory(expand("~/.vim/bundle"))
   call pathogen#runtime_append_all_bundles()
 endif
 
@@ -27,9 +27,6 @@ set scrolloff=3
 
 " Flash the screen on a bell:
 set visualbell
-
-" Store the undo history to a file, and restore it for later. No lost changes.
-set undofile
 
 " Use normal regex formatting! Inserts a \v to turn of vim's silliness.
 nnoremap / /\v
@@ -130,12 +127,23 @@ set autoread
 set whichwrap+=<,>,h,l,~,[,]
 
 " Store undo files, backup files, and swap files in my ~/.vim/tmp/ directory:
-if isdirectory("~/.vim/tmp")
-  set undodir=~/.vim/tmp/undo/     " undo files
-  set backupdir=~/.vim/tmp/backup/ " backups
-  set directory=~/.vim/tmp/swap/   " swap files
+if isdirectory(expand("~/.vim/tmp/"))
+  if has("persistent_undo")
+    set undofile
+    set undolevels=1000
+    set undodir=~/.vim/tmp/undo/   " undo files
+  endif
+
   set backup                       " enable backups
+  set backupdir=~/.vim/tmp/backup/ " backups
+
+  set directory=~/.vim/tmp/swap/   " swap files
 endif
+
+"""" MACVIM """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable control-tab to switch tabs:
+noremap <c-tab> :tabnext<cr>
+noremap <S-c-tab> :tabprevious<cr>
 
 """" MAPPINGS """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
