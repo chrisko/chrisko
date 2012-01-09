@@ -34,7 +34,11 @@ for DIR in $POSTPATHDIRS; do [[ -e $DIR ]] && export PATH=$PATH:$DIR; done
 
 # Look for launchd's SSH authentication socket on OS X:
 if [[ `uname` = "Darwin" ]]; then
-    export SSH_AUTH_SOCK=$(ls /tmp/launch-*/Listeners)
+    if [[ `ls /tmp/launch-*/Listeners 2> /dev/null | wc -l` -gt 0 ]]; then
+        if [[ `ls /tmp/launch-*/Listeners | wc -l` -lt 2 ]]; then
+            export SSH_AUTH_SOCK=`ls /tmp/launch-*/Listeners`
+        fi
+    fi
 fi
 
 # Set up PYTHONPATH. Some directories are specific to homebrew
@@ -42,7 +46,7 @@ fi
 PYTHONDIRS=(
     /usr/local/Cellar/python/2.7.2/lib/python2.7/site-packages
     /home1/c/cis530/Software/python2.6/site-packages
-    $HOME/src/nltk/nltk
+    $HOME/src/nltk
 )
 
 for PYTHONDIR in $PYTHONDIRS; do
@@ -56,7 +60,7 @@ export NODE_PATH=/usr/local/lib/node_modules
 if [[ -d /home1/c/cis530/data ]]; then
     export NLTK_DATA=/home1/c/cis530/data
 else
-    export NLTK_DATA=$HOME/src/nltk/nltk_data/packages
+    export NLTK_DATA=/usr/share/nltk_data
 fi
 
 # An attempt to speed up my oh-my-zsh startup time:
