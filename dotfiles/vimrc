@@ -85,6 +85,9 @@ set softtabstop=4
 " Insert this many spaces for an indentation
 set shiftwidth=4
 
+" Display tabs and trailing spaces visually
+set list listchars=tab:▸\ ,trail:·
+
 " Briefly highlight the matching '(' whenever ')' is typed
 set showmatch
 " How many tenths of a second to blink
@@ -155,6 +158,9 @@ command Q quit
 " Let W mean 'save as sudo':
 command W w !sudo tee % >/dev/null
 
+" Toggle the NERDTree window with control+n.
+nmap <silent> <c-n> :NERDTreeToggle<CR>
+
 " Make it easier to hop around multiple windows, using control+<direction>.
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -184,6 +190,9 @@ map <silent> <Down> gj
 " Enable in-column up and down for wrapped lines in INSERT mode
 imap <silent> <Up>   <C-o>gk
 imap <silent> <Down> <C-o>gj
+
+" Use jj as a stand-in for escape in insert mode
+inoremap jj <Esc>
 
 " Press Space to turn off highlighting and clear any message already displayed.
 :nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>

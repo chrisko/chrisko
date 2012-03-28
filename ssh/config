@@ -6,4 +6,3 @@ Host languishes
 
 Host eniac
     HostName eniac.seas.upenn.edu
-    ForwardX11 yes
