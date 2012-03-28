@@ -45,14 +45,21 @@ PROMPT=$PROMPT'%{$reset_color%} '  # And reset the color, finally.
 # I'll tell you what I typed. By typing it.
 unsetopt correct_all
 
+# If there's a ~/.zsh directory, keep one history file per shell:
+if [[ -d "$HOME/.zsh" ]]; then
+    HISTFILE=$HOME/.zsh/hist.$$
+fi
+
 # Speed up my git completion, which is painfully slow, by keeping it local:
 # From http://talkings.org/post/5236392664/zsh-and-slow-git-completion
 __git_files () {
     _wanted files expl 'local files' _files
 }
 
-# Enable vi editing
+# Enable vi editing. Only *after* this should we set our other bindkeys.
 bindkey -v
+# Use control-r to search backwards in history. Useful stuff.
+bindkey "^r" history-incremental-search-backward
 
 # No beeping
 set nobeep
