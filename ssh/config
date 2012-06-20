@@ -6,3 +6,8 @@ Host languishes
 
 Host eniac
     HostName eniac.seas.upenn.edu
+
+Host ec2*compute-1.amazonaws.com
+    StrictHostKeyChecking no
+    User ubuntu
+    IdentityFile /Users/ckoenig/.ssh/accidence.pem

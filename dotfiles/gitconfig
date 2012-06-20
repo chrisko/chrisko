@@ -12,3 +12,8 @@
 
 [github]
     user = chrisko
+
+[alias]
+    headless = !sh -c 'git symbolic-ref HEAD refs/heads/$0 && rm .git/index && git clean -fdx'
+    # From http://coderwall.com/p/euwpig?i=3&p=1&t=git
+    lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
