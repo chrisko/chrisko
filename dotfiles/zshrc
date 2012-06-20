@@ -22,6 +22,9 @@ ZSH_THEME="robbyrussell"
 # Tell oh-my-zsh to use case-sensitive completion.
 CASE_SENSITIVE="true"
 
+# Don't ask to update oh-my-zsh, just update automatically:
+DISABLE_UPDATE_PROMPT="true"
+
 # Load these oh-my-zsh plugins:
 plugins=()
 # And finally, load oh-my-zsh:
@@ -74,3 +77,6 @@ REPORTTIME=60
 
 # Print out a quote, if the script exists and is executable.
 [[ -x ~/src/ckoenig/bin/motd ]] && ~/src/ckoenig/bin/motd
+
+# Make sure to run rvm to wrap our ruby commands:
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

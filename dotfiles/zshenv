@@ -28,13 +28,8 @@ export PATH=/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/sbin
 # If these directories exist, they should go before the system PATH
 PREPATHDIRS=(/usr/local/share/python)
 for DIR in $PREPATHDIRS; do [[ -e $DIR ]] && export PATH=$DIR:$PATH; done
-# One's for the MacTex distribution, another's for the homebrew Ruby install.
-POSTPATHDIRS=($HOME/src/ckoenig/bin /usr/texbin)
-if [[ `readlink /usr/local/bin/ruby | grep Cellar | wc -l` -gt 0 ]]; then
-    # Make sure we grab the proper Homebrew-installed ruby directory:
-    RUBYVERSION=`readlink /usr/local/bin/ruby | perl -ne '/ruby\/([^\/]+)\/bin/; print "$1\n";'`
-    POSTPATHDIRS+=(/usr/local/Cellar/ruby/$RUBYVERSION/bin)
-fi
+# One's for my motd, one for the MacTex distribution, and one for rvm:
+POSTPATHDIRS=($HOME/src/ckoenig/bin /usr/texbin $HOME/.rvm/bin)
 for DIR in $POSTPATHDIRS; do [[ -e $DIR ]] && export PATH=$PATH:$DIR; done
 
 # Look for launchd's SSH authentication socket on OS X:
@@ -60,9 +55,6 @@ done
 
 # Set Node to use modules in the homebrew install location:
 export NODE_PATH=/usr/local/lib/node_modules
-
-# And gems should be installed in the homebrew directory, too:
-export GEM_HOME=/usr/local
 
 # For NLTK, check for the CIS-530 data directory, otherwise use source.
 if [[ -d /home1/c/cis530/data ]]; then
