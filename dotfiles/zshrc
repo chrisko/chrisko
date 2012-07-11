@@ -21,12 +21,31 @@ ZSH_THEME="robbyrussell"
 
 # Tell oh-my-zsh to use case-sensitive completion.
 CASE_SENSITIVE="true"
+# Put a few red dots while waiting for tab completion.
+#COMPLETION_WAITING_DOTS="true"
 
-# Don't ask to update oh-my-zsh, just update automatically:
-DISABLE_UPDATE_PROMPT="true"
+# See man zshoptions for more details on these options.
+unsetopt AUTO_CD  # Don't auto cd when a directory name is typed.
+setopt AUTO_MENU  # Use menu completion after hitting tab twice.
+#setopt ALWAYS_TO_END  # Move cursor to end if a match was inserted.
+unsetopt CORRECT_ALL  # Don't try to correct what I typed, please.
+#unsetopt COMPLETE_IN_WORD  # Move to the end of the word during completion.
+unsetopt GLOB_COMPLETE  # Don't complete as if a "*" was added at the end.
+unsetopt LIST_AMBIGUOUS  # Don't list ambiguous
+
+zstyle '*' single-ignored complete
+# Take the first part of whatever we typed to be exact:
+zstyle ':completion:*' accept-exact '*(N)'
+# Don't write in file extensions at the end:
+zstyle ':completion:*' file-patterns '%p:globbed-files:'
+# And use the cache to speed things up:
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+# And use color-coded completion:
+zstyle ':completion:*' list-colors "=(#b) #([0-9]#)*=36=31"
 
 # Load these oh-my-zsh plugins:
-plugins=()
+plugins=(brew bundler cap gem git rails3 ruby)
 # And finally, load oh-my-zsh:
 source $ZSH/oh-my-zsh.sh
 
