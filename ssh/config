@@ -9,5 +9,12 @@ Host eniac
 
 Host ec2*compute-1.amazonaws.com
     StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
     User ubuntu
-    IdentityFile /Users/ckoenig/.ssh/accidence.pem
+    IdentityFile /Users/ckoenig/.ssh/speechbird.pem
+
+Host *.speechbird.com
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+    User ubuntu
+    IdentityFile /Users/ckoenig/.ssh/speechbird.pem
