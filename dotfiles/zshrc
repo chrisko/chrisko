@@ -11,57 +11,39 @@
 #     unsetopt xtrace
 #     exec 2>&3 3>&-
 
-## oh-my-zsh ###################################################################
-# Path to your oh-my-zsh configuration.
-export ZSH=$HOME/.oh-my-zsh
+# From https://github.com/MrElendig/dotfiles-alice/blob/master/.zshrc
+setprompt () {
+    # load some modules
+    autoload -U colors zsh/terminfo # Used in the colour alias below
+    colors
+    setopt prompt_subst
 
-# Name of the oh-my-zsh theme to load. Robby Russell's the guy behind oh-my-zsh,
-# and his theme's got some nice git symbols and pretty colors.
-ZSH_THEME="robbyrussell"
+    # make some aliases for the colours: (coud use normal escap.seq's too)
+    for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
+        eval PR_$color='%{$fg[${(L)color}]%}'
+    done
+    PR_NO_COLOR="%{$terminfo[sgr0]%}"
 
-# Tell oh-my-zsh to use case-sensitive completion.
-CASE_SENSITIVE="true"
-# Put a few red dots while waiting for tab completion.
-#COMPLETION_WAITING_DOTS="true"
+    # Check the UID
+    if [[ $UID -ge 1000 ]]; then # normal user
+        eval PR_USER='${PR_GREEN}%n${PR_NO_COLOR}'
+        eval PR_USER_OP='${PR_GREEN}%#${PR_NO_COLOR}'
+    elif [[ $UID -eq 0 ]]; then # root
+        eval PR_USER='${PR_RED}%n${PR_NO_COLOR}'
+        eval PR_USER_OP='${PR_RED}%#${PR_NO_COLOR}'
+    fi
 
-# See man zshoptions for more details on these options.
-unsetopt AUTO_CD  # Don't auto cd when a directory name is typed.
-setopt AUTO_MENU  # Use menu completion after hitting tab twice.
-#setopt ALWAYS_TO_END  # Move cursor to end if a match was inserted.
-unsetopt CORRECT_ALL  # Don't try to correct what I typed, please.
-#unsetopt COMPLETE_IN_WORD  # Move to the end of the word during completion.
-unsetopt GLOB_COMPLETE  # Don't complete as if a "*" was added at the end.
-unsetopt LIST_AMBIGUOUS  # Don't list ambiguous
-
-zstyle '*' single-ignored complete
-# Take the first part of whatever we typed to be exact:
-zstyle ':completion:*' accept-exact '*(N)'
-# Don't write in file extensions at the end:
-zstyle ':completion:*' file-patterns '%p:globbed-files:'
-# And use the cache to speed things up:
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.zsh/cache
-# And use color-coded completion:
-zstyle ':completion:*' list-colors "=(#b) #([0-9]#)*=36=31"
-
-# Load these oh-my-zsh plugins:
-plugins=(brew bundler cap gem git rails3 ruby)
-# And finally, load oh-my-zsh:
-source $ZSH/oh-my-zsh.sh
-
-## personal ####################################################################
-# Do a *slight* bit of fixing to the "robbyrussell" prompt... I like seeing the
-# username and hostname, plus the full path. Use the actual, for-real hostname,
-# too, which is usually overridden by OSX when I'm on DHCP networks.
-ACTUALHOST='%m'
-[[ `ifconfig | grep 'c8:bc:c8:9f:a1:d3' | wc -l` -eq 1 ]] && ACTUALHOST='book'
-[[ `ifconfig | grep '34:15:9e:2e:96:8e' | wc -l` -eq 1 ]] && ACTUALHOST='mini'
-PROMPT='%{$fg[magenta]%}%n%{$reset_color%}'  # Username.
-PROMPT=$PROMPT'@%{$fg[yellow]%}$ACTUALHOST'  # Actual hostname.
-PROMPT=$PROMPT'%{$fg_bold[red]%}➜'  # Red arrow.
-PROMPT=$PROMPT' %{$fg[cyan]%}${PWD/#$HOME/~}'  # PWD, substituting ~ nicely.
-PROMPT=$PROMPT' %{$fg_bold[blue]%}$(git_prompt_info)'  # Git prompt details.
-PROMPT=$PROMPT'%{$reset_color%} '  # And reset the color, finally.
+    # Check if we are on SSH or not
+    if [[ -n "$SSH_CLIENT"  ||  -n "$SSH2_CLIENT" ]]; then
+        eval PR_HOST='${PR_YELLOW}%M${PR_NO_COLOR}' #SSH
+    else
+        eval PR_HOST='${PR_GREEN}%M${PR_NO_COLOR}' # no SSH
+    fi
+    # set the prompt
+    PS1=$'${PR_NO_COLOR}[${PR_USER}${PR_NO_COLOR}@${PR_HOST}${PR_NO_COLOR}][${PR_BLUE}%~${PR_NO_COLOR}]${PR_USER_OP}${PR_NO_COLOR} '
+    PS2=$'%_>'
+}
+setprompt
 
 # Don't tell me what you thought I typed.
 # I'll tell you what I typed. By typing it.

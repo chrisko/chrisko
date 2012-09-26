@@ -69,9 +69,6 @@ else
     export NLTK_DATA=/usr/share/nltk_data
 fi
 
-# Don't ask to update oh-my-zsh, just update automatically:
-DISABLE_UPDATE_PROMPT="true"
-
 # If our AWS credentials are in this file, haul them on in.
 # Should set both AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY.
 [[ -e $HOME/.ec2/credentials.sh ]] && source $HOME/.ec2/credentials.sh
