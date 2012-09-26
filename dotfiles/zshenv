@@ -18,8 +18,14 @@ if [[ -d $HOME/.ec2 ]]; then
     export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.4.2.2/jars"
 fi
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib
+# Commented out due to Mountain Lion; ref. http://lesspress.net/Mountain-Lion-DYLD_LIBRARY_PATH
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig
+# Related to Mountain Lion; ref. https://github.com/mxcl/homebrew/issues/13572
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/Library/Homebrew/pkgconfig
+
+# Use the GCC-4.2 compiler provided by the homebrew formula "apple-gcc42":
+export CC=/usr/local/bin/gcc-4.2
 
 # Set the PATH. Make sure the homebrew bin directory, /usr/local/bin, is first.
 export PATH=/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/sbin
@@ -69,3 +75,5 @@ DISABLE_UPDATE_PROMPT="true"
 # If our AWS credentials are in this file, haul them on in.
 # Should set both AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY.
 [[ -e $HOME/.ec2/credentials.sh ]] && source $HOME/.ec2/credentials.sh
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

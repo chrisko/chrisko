@@ -10,11 +10,16 @@ Host eniac
 Host ec2*compute-1.amazonaws.com
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
+    LogLevel error
     User ubuntu
     IdentityFile /Users/ckoenig/.ssh/speechbird.pem
 
 Host *.speechbird.com
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
+    LogLevel error
     User ubuntu
     IdentityFile /Users/ckoenig/.ssh/speechbird.pem
+    # http://www.debian-administration.org/articles/290
+    #ControlMaster auto
+    #ControlPath /tmp/%r@%h:%p
