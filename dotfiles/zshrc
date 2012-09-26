@@ -14,7 +14,23 @@
 # From https://github.com/MrElendig/dotfiles-alice/blob/master/.zshrc
 setprompt () {
     # load some modules
-    autoload -U colors zsh/terminfo # Used in the colour alias below
+    autoload -U colors vcs_info zsh/terminfo # Used in the colour alias below
+
+    # http://briancarper.net/blog/570/git-info-in-your-zsh-prompt
+    zstyle ':vcs_info:*' stagedstr '%F{28}●'
+    zstyle ':vcs_info:*' unstagedstr '%F{yellow}●'
+    zstyle ':vcs_info:*' check-for-changes true
+    zstyle ':vcs_info:*' enable git
+    precmd() {
+        if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
+            zstyle ':vcs_info:*' formats '[%F{green}%b%c%u%f]'
+        } else {
+            zstyle ':vcs_info:*' formats '[%F{green}%b%c%u%F{red}●%f]'
+        }
+
+        vcs_info
+    }
+
     colors
     setopt prompt_subst
 
@@ -40,7 +56,7 @@ setprompt () {
         eval PR_HOST='${PR_GREEN}%M${PR_NO_COLOR}' # no SSH
     fi
     # set the prompt
-    PS1=$'${PR_NO_COLOR}[${PR_USER}${PR_NO_COLOR}@${PR_HOST}${PR_NO_COLOR}][${PR_BLUE}%~${PR_NO_COLOR}]${PR_USER_OP}${PR_NO_COLOR} '
+    PS1=$'${PR_NO_COLOR}[${PR_USER}${PR_NO_COLOR}@${PR_HOST}${PR_NO_COLOR}][${PR_BLUE}%~${PR_NO_COLOR}]${vcs_info_msg_0_}${PR_USER_OP}${PR_NO_COLOR} '
     PS2=$'%_>'
 }
 setprompt
