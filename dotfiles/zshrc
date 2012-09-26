@@ -45,6 +45,9 @@ setprompt () {
 }
 setprompt
 
+# Enable "ls -G" mode for colorized output on OS X.
+export CLICOLOR=1
+
 # Don't tell me what you thought I typed.
 # I'll tell you what I typed. By typing it.
 unsetopt correct_all
