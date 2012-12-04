@@ -37,7 +37,7 @@ export PATH=/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/sbin
 
 # Tack on a few optional directories, if they exist on the local host.
 # If these directories exist, they should go before the system PATH
-PREPATHDIRS=(/usr/local/share/python)
+PREPATHDIRS=(/usr/local/share/python /usr/local/share/python3)
 for DIR in $PREPATHDIRS; do [[ -e $DIR ]] && export PATH=$DIR:$PATH; done
 # One's for my motd, and one for the MacTex distribution:
 POSTPATHDIRS=($HOME/src/ckoenig/bin /usr/texbin)

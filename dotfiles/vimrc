@@ -168,9 +168,6 @@ command Q quit
 " Let W mean 'save as sudo':
 command W w !sudo tee % >/dev/null
 
-" Toggle the NERDTree window with control+n.
-nmap <silent> <c-n> :NERDTreeToggle<CR>
-
 " Make it easier to hop around multiple windows, using control+<direction>.
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
