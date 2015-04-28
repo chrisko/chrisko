@@ -29,8 +29,10 @@ export PKG_CONFIG_PATH
 # For gobject-introspection to find our homebrew-installed ".typelib" files:
 export GI_TYPELIB_PATH=/usr/local/lib/girepository-1.0
 
-# Use the GCC-4.2 compiler provided by the homebrew formula "apple-gcc42":
-export CC=/usr/local/bin/gcc-4.2
+if [[ `uname` = "Darwin" ]]; then
+    # Use the GCC-4.2 compiler provided by the homebrew formula "apple-gcc42":
+    export CC=/usr/local/bin/gcc-4.2
+fi
 
 # Set the PATH. Make sure the homebrew bin directory, /usr/local/bin, is first.
 export PATH=/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/sbin
@@ -40,7 +42,7 @@ export PATH=/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/sbin
 PREPATHDIRS=(/usr/local/share/python /usr/local/share/python3)
 for DIR in $PREPATHDIRS; do [[ -e $DIR ]] && export PATH=$DIR:$PATH; done
 # One's for my motd, and one for the MacTex distribution:
-POSTPATHDIRS=($HOME/src/ckoenig/bin /usr/texbin)
+POSTPATHDIRS=($HOME/src/ckoenig/bin /usr/texbin /cygdrive/c/HashiCorp/Vagrant/bin)
 for DIR in $POSTPATHDIRS; do [[ -e $DIR ]] && export PATH=$PATH:$DIR; done
 
 # Look for launchd's SSH authentication socket on OS X:
