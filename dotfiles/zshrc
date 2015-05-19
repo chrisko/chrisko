@@ -13,7 +13,7 @@
 
 if [[ -d ${HOME}/.oh-my-zsh ]]; then
     export ZSH=$HOME/.oh-my-zsh
-    plugins=(git)
+    plugins=(git ssh-agent)
     ZSH_THEME="babun"
     source $ZSH/oh-my-zsh.sh
 else
@@ -105,17 +105,6 @@ fi
 
 alias vagrantssh="(cd ~/src/vm && vagrant ssh base)"
 
-export SSH_AUTH_SOCK=/home/chris.koenig/.ssh/socket
-
-ssh-add -l >/dev/null 2>&1
-if [ $? = 2 ]; then
-   # No ssh-agent running
-   rm -rf $SSH_AUTH_SOCK
-   # >| allows output redirection to over-write files if no clobber is set
-   ssh-agent -a $SSH_AUTH_SOCK >| /tmp/.ssh-script
-   source /tmp/.ssh-script
-   echo $SSH_AGENT_PID >| ~/.ssh-agent-pid
-   rm /tmp/.ssh-script
-fi
-
-ssh-add ~/.ssh/id_rsa &> /dev/null
+alias gdbit='sudo gdb -p $(ps -C xl -o pid=) ~/src/xl/main_debug_build/target/xl/bin/xl'
+alias makestart='make -C ~/src/xl WPIDEV=1 XL_VERSION=2.0.0.0 -j8 start'
+alias restartit='curl -X POST -d "{ }" http://127.0.0.1/rest/xl/_/restart'
