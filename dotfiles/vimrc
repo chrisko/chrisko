@@ -207,6 +207,9 @@ inoremap jj <Esc>
 " Map backspace to delete previous character
 nmap <BS> <Esc><C-V><BS><Esc>
 
+" Ignore ctrl-a, which I use as my tmux control key.
+map <C-a> <Nop>
+
 map ,, <Esc><C-w><C-w>
 
 " Quickly remove old searches, which are pretty distracting.
