@@ -109,5 +109,6 @@ alias gdbit='sudo gdb -p $(ps -C xl -o pid=) ~/src/xl/main_debug_build/target/xl
 alias makestart='make -C ~/src/xl WPIDEV=1 -j8 start'
 alias maketest='make -C ~/src/xl -j8 test'
 alias restartit='curl -X POST -d "{ }" http://127.0.0.1/rest/xl/_/restart'
+alias amendnow='GIT_COMMITTER_DATE="$(date)" git commit --amend --date "$(date)" --no-edit'
 
 alias fetchall='for DIR in $(ls ~/src); do (cd ~/src/${DIR} && git fetch --all --prune); done'
