@@ -1,0 +1,8 @@
+# Don't pause the output for any reason, ever.
+# This is why I use tmux. Just scroll and continue.
+set pagination off
+
+# Don't stop for SIGPIPE (it's emitted from FastCGI when a
+# connection is reset) and show SIGINT but pass it through.
+handle SIGPIPE nostop noprint pass
+handle SIGINT nostop print pass
