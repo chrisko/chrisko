@@ -45,15 +45,6 @@ for DIR in $PREPATHDIRS; do [[ -e $DIR ]] && export PATH=$DIR:$PATH; done
 POSTPATHDIRS=($HOME/src/ckoenig/bin /usr/texbin /cygdrive/c/HashiCorp/Vagrant/bin)
 for DIR in $POSTPATHDIRS; do [[ -e $DIR ]] && export PATH=$PATH:$DIR; done
 
-# Look for launchd's SSH authentication socket on OS X:
-if [[ `uname` = "Darwin" ]]; then
-    if [[ `ls /tmp/launch-*/Listeners 2> /dev/null | wc -l` -gt 0 ]]; then
-        if [[ `ls /tmp/launch-*/Listeners | wc -l` -lt 2 ]]; then
-            export SSH_AUTH_SOCK=`ls /tmp/launch-*/Listeners`
-        fi
-    fi
-fi
-
 # Set up our PYTHONPATH with our homebrew-specific directory:
 PYTHONDIRS=(/usr/local/Cellar/python/2.7.2/lib/python2.7/site-packages)
 
