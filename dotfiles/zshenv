@@ -12,5 +12,5 @@ export LC_ALL=en_US.UTF-8
 export EDITOR=vim
 
 # For Homebrew.
-PATH=/usr/local/bin:${PATH}
+PATH=/usr/local/bin:/usr/local/sbin:${PATH}
 export PATH
