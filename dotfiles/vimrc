@@ -32,20 +32,6 @@ set visualbell
 nnoremap / /\v
 vnoremap / /\v
 
-" Save and load fold settings automatically. From http://dotfiles.org/~tsukkee/.vimrc
-" Don't save options.
-set viewoptions-=options
-augroup vimrc
-    autocmd BufWritePost *
-    \   if expand('%') != '' && &buftype !~ 'nofile'
-    \|      mkview
-    \|  endif
-    autocmd BufRead *
-    \   if expand('%') != '' && &buftype !~ 'nofile'
-    \|      silent loadview
-    \|  endif
-augroup END
-
 " Show the cursor position at all times
 set ruler
 
@@ -119,9 +105,6 @@ set vb t_vb=
 
 " In insert mode, allow backspace over anything (line breaks, text beyond this insert session, indentations)
 set backspace=eol,start,indent
-
-" Recognize DOS-format ^M files
-set textauto
 
 " BOMB and Unicode encodings
 if has("multi_byte")
@@ -214,3 +197,13 @@ map ,, <Esc><C-w><C-w>
 
 " Quickly remove old searches, which are pretty distracting.
 nnoremap <leader><space> :noh<cr>
+
+" Support scrolling, click to navigate.
+set mouse=a
+
+" Use the system clipboard for yank/paste.
+if has("unnamedplus")
+    set clipboard=unnamedplus
+else
+    set clipboard=unnamed
+endif

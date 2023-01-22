@@ -13,4 +13,5 @@ export EDITOR=vim
 
 # For Homebrew.
 PATH=/usr/local/bin:/usr/local/sbin:${PATH}
+PATH=/Users/ckoenig/.deno/bin:${PATH}
 export PATH
